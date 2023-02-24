@@ -11,6 +11,7 @@ import BigText from "../components/texts/BIgText";
 
 //image
 import background from "../assets/background_1.png";
+import RegularButton from "../components/buttons/RegularButton";
 
 const WelcomeContainer = styled(Container)`
 background-color: ${colors.green};
@@ -35,6 +36,7 @@ const BottomSection = styled.View`
   width: 100%;
   padding: 25px;
   flex: 1;
+  justify-content: flex-end;
 `;
 
 const Welcome: FunctionComponent = () => {
@@ -52,9 +54,15 @@ const Welcome: FunctionComponent = () => {
           <RegularText textStyles={{width: '70%', marginBottom: 25}}>
             {'Connect with your friends\nSee how they are doing'}
           </RegularText>
-          <BigText>
+          <BigText textStyles={{width: '70%', marginBottom: 25}}>
             Keep each other motivated
           </BigText>
+          <RegularButton
+          textStyles={{color: colors.green, fontSize: 25}}
+            onPress={() => {}}
+          >
+            <strong>Get Started</strong>
+          </RegularButton>
         </BottomSection>
       </WelcomeContainer>
     </>
