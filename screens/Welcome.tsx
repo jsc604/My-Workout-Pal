@@ -8,13 +8,13 @@ import { colors } from "../components/colors";
 import HeaderText from "../components/texts/HeaderText";
 import RegularText from "../components/texts/RegularText";
 import BigText from "../components/texts/BIgText";
+import RegularButton from "../components/buttons/RegularButton";
 
 //image
 import background from "../assets/background_1.png";
-import RegularButton from "../components/buttons/RegularButton";
 
 const WelcomeContainer = styled(Container)`
-background-color: ${colors.green};
+background-color: black;
 justify-content: space-between;
 height: 100%;
 width: 100%;
@@ -42,24 +42,24 @@ const BottomSection = styled.View`
 const Welcome: FunctionComponent = () => {
   return (
     <>
-      <StatusBar style="light"/>
+      <StatusBar style="light" />
       <WelcomeContainer>
         <TopSection>
           <TopImage source={background} />
         </TopSection>
         <BottomSection>
-          <HeaderText textStyles={{width: '70%', marginBottom: 25}}>
+          <HeaderText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
             Track Your Fitness Progress
           </HeaderText>
-          <RegularText textStyles={{width: '70%', marginBottom: 25}}>
+          <RegularText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
             {'Connect with your friends\nSee how they are doing'}
           </RegularText>
-          <BigText textStyles={{width: '70%', marginBottom: 25}}>
+          <BigText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
             Keep each other motivated
           </BigText>
           <RegularButton
-          textStyles={{color: colors.green, fontSize: 25}}
-            onPress={() => {}}
+            textStyles={{ color: 'black', fontSize: 25 }}
+            onPress={() => { }}
           >
             <strong>Get Started</strong>
           </RegularButton>

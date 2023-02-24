@@ -8,7 +8,7 @@ import RegularText from "../texts/RegularText";
 
 const ButtonView = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${colors.black}
+  background-color: ${colors.green};
   width: 100%;
   padding: 20px;
   border-radius: 20px;
