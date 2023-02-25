@@ -13,9 +13,6 @@ import { colors } from "../components/colors";
 import Greeting from "../components/header/Greeting";
 import Profile from "../components/header/Profile";
 
-// image
-import avatar from "../assets/avatar.jpeg";
-
 type RootStackParamList = {
   Welcome: undefined;
   Home: undefined;
@@ -31,7 +28,6 @@ const RootStack: FunctionComponent = () => {
           headerTintColor: colors.black,     
           headerRight: () => (
             <Profile
-              img={avatar}
               imgContainerStyle={{ backgroundColor: colors.green, marginRight: 10 }}
             />
           )
