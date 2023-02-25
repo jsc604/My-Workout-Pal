@@ -10,6 +10,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // custom components
 import { colors } from "../components/colors";
+import Greeting from "../components/header/Greeting";
+import Profile from "../components/header/Profile";
+
+// image
+import avatar from "../assets/avatar.jpeg";
 
 type RootStackParamList = {
   Welcome: undefined;
@@ -22,17 +27,15 @@ const RootStack: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        // screenOptions={{
-        //   headerStyle: {
-        //     backgroundColor: colors.black,
-        //     borderBottomWidth: 0,
-        //     shadowColor: 'transparent',
-        //     shadowOpacity: 0,
-        //     elevation: 0,
-        //     height: 120,
-        //   },
-        //   headerTintColor: colors.green,
-        // }}
+        screenOptions={{
+          headerTintColor: colors.black,     
+          headerRight: () => (
+            <Profile
+              img={avatar}
+              imgContainerStyle={{ backgroundColor: colors.green, marginRight: 10 }}
+            />
+          )
+        }}
         initialRouteName="Home"
       >
         <Stack.Screen
@@ -41,8 +44,18 @@ const RootStack: FunctionComponent = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home" 
-          component={Home} 
+          name="Home"
+          component={Home}
+          options={{
+            headerTitle: (props) => (
+              <Greeting
+                mainText="Hey Bentley,"
+                subText="Welcome back!"
+                {...props}
+              />
+            ),
+            headerLeft: () => <></>
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
