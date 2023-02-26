@@ -27,7 +27,7 @@ const Greeting: FunctionComponent<GreetingProps> = (props) => {
       <BigText
         textStyles={[
           {
-            color: colors.black,
+            color: 'black',
             fontSize: 22,
           },
           props.mainTextStyles

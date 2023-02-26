@@ -34,7 +34,7 @@ const RootStack: FunctionComponent = () => {
             />
           )
         }}
-        initialRouteName="Welcome"
+        initialRouteName="Home"
       >
         <Stack.Screen
           name="SplashScreen"

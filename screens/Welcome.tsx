@@ -40,9 +40,10 @@ const BottomSection = styled.View`
 `;
 
 const Welcome: FunctionComponent = () => {
+
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <WelcomeContainer>
         <TopSection>
           <TopImage source={background}/>

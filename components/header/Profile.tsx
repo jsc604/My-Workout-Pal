@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { ImageSourcePropType, GestureResponderEvent, StyleProp, ViewStyle, ImageStyle } from "react-native";
-import styled from "styled-components/native";
+import { ImageSourcePropType, GestureResponderEvent, StyleProp, ViewStyle, ImageStyle, TouchableOpacity, Image, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import styled from "styled-components/native";
 import BigText from "../texts/BIgText";
 
 const StyledView = styled.TouchableOpacity`
@@ -25,8 +25,10 @@ interface ProfileProps {
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
+import defaultAvatar from '../../assets/avatar.jpeg';
+
 const Profile: FunctionComponent<ProfileProps> = (props) => {
-  const [image, setImage] = useState(require('../../assets/avatar.jpeg'));
+  const [image, setImage] = useState({ uri: defaultAvatar });
   const [galleryPermission, setGalleryPermission] = useState(false);
 
   useEffect(() => {
@@ -37,19 +39,19 @@ const Profile: FunctionComponent<ProfileProps> = (props) => {
       }
     })();
   }, []);
-  
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4,3],
+      aspect: [4, 3],
       quality: 1,
     })
 
     console.log(result);
 
-    if (!result.canceled) {
-      setImage(result);
+    if (!result.canceled && result.assets) {
+      setImage(result.assets[0]);
     }
   };
 
@@ -59,7 +61,7 @@ const Profile: FunctionComponent<ProfileProps> = (props) => {
 
   return (
     <StyledView onPress={() => pickImage()} style={props.imgContainerStyle}>
-      {image && <StyledImage style={props.ImgStyle} source={{uri: image.uri}} />}
+      {image && <StyledImage style={props.ImgStyle} source={image.uri ? { uri: image.uri } : defaultAvatar} />}
     </StyledView>
   )
 };
