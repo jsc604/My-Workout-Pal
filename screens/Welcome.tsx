@@ -11,7 +11,7 @@ import BigText from "../components/texts/BIgText";
 import RegularButton from "../components/buttons/RegularButton";
 
 //image
-import background from "../assets/background_1.png";
+import background from "../assets/evan-wise-wTcD3MwL_VY-unsplash.jpg";
 
 const WelcomeContainer = styled(Container)`
 background-color: black;
@@ -29,7 +29,7 @@ const TopSection = styled.View`
 const TopImage = styled.Image`
   width: 100%;
   height: 100%;
-  resize-mode: fit;
+  resize-mode: cover;
 `;
 
 const BottomSection = styled.View`
@@ -45,7 +45,7 @@ const Welcome: FunctionComponent = () => {
       <StatusBar style="light" />
       <WelcomeContainer>
         <TopSection>
-          <TopImage source={background} />
+          <TopImage source={background}/>
         </TopSection>
         <BottomSection>
           <HeaderText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>

@@ -12,8 +12,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "../components/colors";
 import Greeting from "../components/header/Greeting";
 import Profile from "../components/header/Profile";
+import SplashScreen from "../screens/SplashScreenAnimation";
 
 type RootStackParamList = {
+  SplashScreen: undefined;
   Welcome: undefined;
   Home: undefined;
 }
@@ -32,8 +34,13 @@ const RootStack: FunctionComponent = () => {
             />
           )
         }}
-        initialRouteName="Home"
+        initialRouteName="Welcome"
       >
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Welcome"
           component={Welcome}

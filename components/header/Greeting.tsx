@@ -11,7 +11,7 @@ const StyledView = styled.View`
   flex-direction: column;
   flex: 1;
   justify-content: center;
-  margin-left: 5;
+  margin-left: 5px;
 `;
 
 interface GreetingProps {

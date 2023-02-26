@@ -49,7 +49,7 @@ const Profile: FunctionComponent<ProfileProps> = (props) => {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.uri);
+      setImage(result);
     }
   };
 
@@ -59,7 +59,7 @@ const Profile: FunctionComponent<ProfileProps> = (props) => {
 
   return (
     <StyledView onPress={() => pickImage()} style={props.imgContainerStyle}>
-      {image && <StyledImage style={props.ImgStyle} source={{uri: image}} />}
+      {image && <StyledImage style={props.ImgStyle} source={{uri: image.uri}} />}
     </StyledView>
   )
 };
