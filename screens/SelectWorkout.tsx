@@ -19,11 +19,11 @@ const SelectWorkoutContainer = styled(Container)`
 const SelectWorkout: FunctionComponent<Props> = ({navigation}) => {
   return (
     <SelectWorkoutContainer>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
         <RegularButton
           onPress={() => { navigation.navigate("CreateWorkout") }}
           textStyles={{ fontSize: 20 }}
-          btnStyles={{ width: '70%', marginTop: 20 }}
+          btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.orange }}
         >
           <strong>Create A New Workout</strong>
         </RegularButton>

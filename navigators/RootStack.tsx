@@ -38,7 +38,7 @@ const RootStack: FunctionComponent = () => {
             />
           )
         }}
-        initialRouteName="SelectWorkout"
+        initialRouteName="CreateWorkout"
       >
         <Stack.Screen
           name="SplashScreen"
@@ -70,7 +70,7 @@ const RootStack: FunctionComponent = () => {
           options={{
             headerTitle: (props) => (
               <Greeting
-                mainText="Select A Workout"
+                mainText="Select Workout"
                 {...props}
               />
             ),
@@ -80,6 +80,15 @@ const RootStack: FunctionComponent = () => {
         <Stack.Screen
           name="CreateWorkout"
           component={CreateWorkout} 
+          options={{
+            headerTitle: (props) => (
+              <Greeting
+                mainText="Create Workout"
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

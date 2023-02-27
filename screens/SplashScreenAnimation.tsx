@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { Container } from "../components/shared";
 
 // image
-import dumbbell from "../assets/dumbbell black.jpg";
+import dumbbell from "../assets/heavy-dumbbell-in-hand-cartoon-gym-bodybuilding-vector-13671760-removebg-preview.png";
 
 const SplashScreenContainer = styled(Container)`
   background-color: black;

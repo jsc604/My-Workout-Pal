@@ -18,7 +18,7 @@ const HomeContainer = styled(Container)`
 const Home: FunctionComponent<Props> = ({navigation}) => {
   return (
     <HomeContainer>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("SelectWorkout") }}
         textStyles={{ fontSize: 20 }}
