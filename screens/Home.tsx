@@ -7,30 +7,31 @@ import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
 
+// navigation
+import { RootStackParamList } from "../navigators/RootStack"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+type Props = NativeStackScreenProps<RootStackParamList, "Home">;
+
 const HomeContainer = styled(Container)`
-  background-color: white;
-  // justify-content: center;
-  width: 100%;
-  flex: 1;
 `;
 
-const Home: FunctionComponent = () => {
+const Home: FunctionComponent<Props> = ({navigation}) => {
   return (
     <HomeContainer>
       <StatusBar style="dark" />
-      <RegularButton 
-        onPress={() => {}}
-        textStyles={{fontSize: 20}}
-        btnStyles={{width: '70%', marginTop: 20}}
-        >
-          <strong>Start A New Workout</strong>
+      <RegularButton
+        onPress={() => { navigation.navigate("SelectWorkout") }}
+        textStyles={{ fontSize: 20 }}
+        btnStyles={{ width: '70%', marginTop: 20 }}
+      >
+        <strong>Start A New Workout</strong>
       </RegularButton>
-      <RegularButton 
-        onPress={() => {}}
-        textStyles={{fontSize: 20}}
-        btnStyles={{width: '70%', marginTop: 20, backgroundColor: colors.orange}}
-        >
-          <strong>Your Progress</strong>
+      <RegularButton
+        onPress={() => { }}
+        textStyles={{ fontSize: 20 }}
+        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.orange }}
+      >
+        <strong>Your Progress</strong>
       </RegularButton>
     </HomeContainer>
   )

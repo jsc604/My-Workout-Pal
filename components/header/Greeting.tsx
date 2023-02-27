@@ -16,7 +16,7 @@ const StyledView = styled.View`
 
 interface GreetingProps {
   mainText: string;
-  subText: string;
+  subText?: string;
   mainTextStyles?: StyleProp<TextStyle>;
   subTextStyles?: StyleProp<TextStyle>;
 };

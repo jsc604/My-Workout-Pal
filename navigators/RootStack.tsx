@@ -13,11 +13,13 @@ import { colors } from "../components/colors";
 import Greeting from "../components/header/Greeting";
 import Profile from "../components/header/Profile";
 import SplashScreen from "../screens/SplashScreenAnimation";
+import SelectWorkout from "../screens/SelectWorkout";
 
-type RootStackParamList = {
+export type RootStackParamList = {
   SplashScreen: undefined;
   Welcome: undefined;
   Home: undefined;
+  SelectWorkout: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -30,11 +32,11 @@ const RootStack: FunctionComponent = () => {
           headerTintColor: colors.black,     
           headerRight: () => (
             <Profile
-              imgContainerStyle={{ backgroundColor: colors.green, marginRight: 10 }}
+              imgContainerStyle={{ marginRight: 10 }}
             />
           )
         }}
-        initialRouteName="Home"
+        initialRouteName="SelectWorkout"
       >
         <Stack.Screen
           name="SplashScreen"
@@ -58,6 +60,19 @@ const RootStack: FunctionComponent = () => {
               />
             ),
             headerLeft: () => <></>
+          }}
+        />
+        <Stack.Screen
+          name="SelectWorkout"
+          component={SelectWorkout} 
+          options={{
+            headerTitle: (props) => (
+              <Greeting
+                mainText="Select A Workout"
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
           }}
         />
       </Stack.Navigator>

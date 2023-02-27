@@ -2,7 +2,12 @@ import { FunctionComponent } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 
-//custom components
+// navigation
+import { RootStackParamList } from "../navigators/RootStack"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
+
+// custom components
 import { Container } from "../components/shared";
 import { colors } from "../components/colors";
 import HeaderText from "../components/texts/HeaderText";
@@ -10,7 +15,7 @@ import RegularText from "../components/texts/RegularText";
 import BigText from "../components/texts/BIgText";
 import RegularButton from "../components/buttons/RegularButton";
 
-//image
+// image
 import background from "../assets/evan-wise-wTcD3MwL_VY-unsplash.jpg";
 
 const WelcomeContainer = styled(Container)`
@@ -39,14 +44,14 @@ const BottomSection = styled.View`
   justify-content: flex-end;
 `;
 
-const Welcome: FunctionComponent = () => {
+const Welcome: FunctionComponent<Props> = ({ navigation }) => {
 
   return (
     <>
       <StatusBar style="dark" />
       <WelcomeContainer>
         <TopSection>
-          <TopImage source={background}/>
+          <TopImage source={background} />
         </TopSection>
         <BottomSection>
           <HeaderText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
@@ -60,7 +65,7 @@ const Welcome: FunctionComponent = () => {
           </BigText>
           <RegularButton
             textStyles={{ color: 'black', fontSize: 25 }}
-            onPress={() => { }}
+            onPress={() => { navigation.navigate("Home") }}
           >
             <strong>Get Started</strong>
           </RegularButton>
