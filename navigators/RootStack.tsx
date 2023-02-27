@@ -3,6 +3,10 @@ import { FunctionComponent } from "react";
 // screens
 import Welcome from "../screens/Welcome";
 import Home from "../screens/Home";
+import Greeting from "../components/header/Greeting";
+import Profile from "../components/header/Profile";
+import SplashScreen from "../screens/SplashScreenAnimation";
+import SelectWorkout from "../screens/SelectWorkout";
 
 // react navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -10,16 +14,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // custom components
 import { colors } from "../components/colors";
-import Greeting from "../components/header/Greeting";
-import Profile from "../components/header/Profile";
-import SplashScreen from "../screens/SplashScreenAnimation";
-import SelectWorkout from "../screens/SelectWorkout";
+import CreateWorkout from "../screens/CreateWorkout";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
   Welcome: undefined;
   Home: undefined;
   SelectWorkout: undefined;
+  CreateWorkout: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -74,6 +76,10 @@ const RootStack: FunctionComponent = () => {
             ),
             headerTitleAlign: 'center'
           }}
+        />
+        <Stack.Screen
+          name="CreateWorkout"
+          component={CreateWorkout} 
         />
       </Stack.Navigator>
     </NavigationContainer>
