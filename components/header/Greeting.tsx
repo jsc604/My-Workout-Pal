@@ -43,7 +43,7 @@ const Greeting: FunctionComponent<GreetingProps> = (props) => {
           },
           props.subTextStyles
         ]}>
-          {props.subText}
+        {props.subText}
       </RegularText>
     </StyledView>
   )

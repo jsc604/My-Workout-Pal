@@ -25,7 +25,7 @@ const WorkoutInputs = styled(Container)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 60%;
   height: fit;
   flex: 0.1;
   z-index: 2;
@@ -113,17 +113,20 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
         </RegularButton>
       </WorkoutInputs>
 
-      <ScrollView style={{ width: "80%", flex: 1, marginBottom: 20 }}>
-        <View style={{ alignItems: "center" }}>
-          <BigText>{workoutName}</BigText>
-          <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
-            <RegularText textStyles={{ width: '50%' }}>Exercise</RegularText>
-            <RegularText textStyles={{ width: '25%', textAlign: 'center' }}>Sets</RegularText>
-            <RegularText textStyles={{ width: '25%', textAlign: 'center' }}>Reps</RegularText>
+      {workoutName && <BigText>{workoutName}</BigText>}
+
+      {workoutData.length > 0 &&
+        (<ScrollView style={{ width: "80%", flex: 1, marginBottom: 20 }}>
+          <View style={{ alignItems: "center" }}>
+            <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
+              <RegularText textStyles={{ width: '50%' }}>Exercise</RegularText>
+              <RegularText textStyles={{ width: '25%', textAlign: 'center' }}>Sets</RegularText>
+              <RegularText textStyles={{ width: '25%', textAlign: 'center' }}>Reps</RegularText>
+            </View>
+            {workoutDataRow}
           </View>
-          {workoutDataRow}
-        </View>
-      </ScrollView>
+        </ScrollView>)}
+
       <RegularButton
         onPress={() => { }}
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}

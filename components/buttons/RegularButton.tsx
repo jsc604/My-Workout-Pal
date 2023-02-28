@@ -23,11 +23,11 @@ interface ButtonProps {
 
 const RegularButton: FunctionComponent<ButtonProps> = (props) => {
   return (
-  <ButtonView onPress={props.onPress} style={props.btnStyles}>
-    <RegularText textStyles={props.textStyles}>
-      {props.children}
-    </RegularText>
-  </ButtonView>
+    <ButtonView onPress={props.onPress} style={props.btnStyles}>
+      <RegularText textStyles={props.textStyles}>
+        {props.children}
+      </RegularText>
+    </ButtonView>
   );
 };
 

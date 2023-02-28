@@ -32,5 +32,5 @@ export const exercises = [
   { label: "Leg Raises", value: "leg-raises" },
   { label: "Glute Bridges", value: "glute-bridges" },
   { label: "Hip Thrusts", value: "hip-thrusts" },
-  { label: "Bicycle Kicks", value: "bicycle-kicks" }
+  { label: "Bicycle Kicks", value: "bicycle-kicks" },
 ];

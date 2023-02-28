@@ -31,7 +31,7 @@ const RootStack: FunctionComponent = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTintColor: colors.black,     
+          headerTintColor: colors.black,
           headerRight: () => (
             <Profile
               imgContainerStyle={{ marginRight: 10 }}
@@ -66,7 +66,7 @@ const RootStack: FunctionComponent = () => {
         />
         <Stack.Screen
           name="SelectWorkout"
-          component={SelectWorkout} 
+          component={SelectWorkout}
           options={{
             headerTitle: (props) => (
               <Greeting
@@ -79,7 +79,7 @@ const RootStack: FunctionComponent = () => {
         />
         <Stack.Screen
           name="CreateWorkout"
-          component={CreateWorkout} 
+          component={CreateWorkout}
           options={{
             headerTitle: (props) => (
               <Greeting

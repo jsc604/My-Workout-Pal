@@ -15,7 +15,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 const HomeContainer = styled(Container)`
 `;
 
-const Home: FunctionComponent<Props> = ({navigation}) => {
+const Home: FunctionComponent<Props> = ({ navigation }) => {
   return (
     <HomeContainer>
       <StatusBar style="light" />

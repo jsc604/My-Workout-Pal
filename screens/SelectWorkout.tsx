@@ -16,25 +16,25 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 const SelectWorkoutContainer = styled(Container)`
 `;
 
-const SelectWorkout: FunctionComponent<Props> = ({navigation}) => {
+const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   return (
     <SelectWorkoutContainer>
       <StatusBar style="light" />
-        <RegularButton
-          onPress={() => { navigation.navigate("CreateWorkout") }}
-          textStyles={{ fontSize: 20 }}
-          btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.orange }}
-        >
-          <strong>Create A New Workout</strong>
-        </RegularButton>
-      
-        <RegularText textStyles={{fontSize: 20, color: colors.black, marginTop: 'auto'}}>
-          You have no workouts
-        </RegularText>
-        <RegularText textStyles={{fontSize: 20, color: colors.black, marginBottom: 'auto'}}>
-          Create one to get started
-        </RegularText>
-      
+      <RegularButton
+        onPress={() => { navigation.navigate("CreateWorkout") }}
+        textStyles={{ fontSize: 20 }}
+        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.orange }}
+      >
+        <strong>Create A New Workout</strong>
+      </RegularButton>
+
+      <RegularText textStyles={{ fontSize: 20, color: colors.black, marginTop: 'auto' }}>
+        You have no workouts
+      </RegularText>
+      <RegularText textStyles={{ fontSize: 20, color: colors.black, marginBottom: 'auto' }}>
+        Create one to get started
+      </RegularText>
+
     </SelectWorkoutContainer>
   )
 };
