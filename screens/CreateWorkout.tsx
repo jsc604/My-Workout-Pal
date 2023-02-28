@@ -128,7 +128,10 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
         </ScrollView>)}
 
       <RegularButton
-        onPress={() => { }}
+        onPress={ 
+          () => {}
+          // console.log({name: workoutName, exercises: workoutData})
+        }
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
         textStyles={{ fontSize: 20 }}
       >
