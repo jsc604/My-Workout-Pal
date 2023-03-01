@@ -7,6 +7,8 @@ import Greeting from "../components/header/Greeting";
 import Profile from "../components/header/Profile";
 import SplashScreen from "../screens/SplashScreenAnimation";
 import SelectWorkout from "../screens/SelectWorkout";
+import CreateWorkout from "../screens/CreateWorkout";
+import EditWorkout from "../screens/EditWorkout";
 
 // react navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,7 +16,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // custom components
 import { colors } from "../components/colors";
-import CreateWorkout from "../screens/CreateWorkout";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   Home: undefined;
   SelectWorkout: undefined;
   CreateWorkout: undefined;
+  EditWorkout: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,7 +40,7 @@ const RootStack: FunctionComponent = () => {
             />
           )
         }}
-        initialRouteName="SelectWorkout"
+        initialRouteName="EditWorkout"
       >
         <Stack.Screen
           name="SplashScreen"
@@ -84,6 +86,19 @@ const RootStack: FunctionComponent = () => {
             headerTitle: (props) => (
               <Greeting
                 mainText="Create Workout"
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
+          }}
+        />
+        <Stack.Screen
+          name="EditWorkout"
+          component={EditWorkout}
+          options={{
+            headerTitle: (props) => (
+              <Greeting
+                mainText="Edit Workout"
                 {...props}
               />
             ),
