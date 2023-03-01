@@ -122,7 +122,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation }) => {
           placeholder="Select exercises"
           labelStyle={{
             textAlign: 'left',
-            fontSize: 16
+            fontSize: 20
           }}
           setValue={setExercise}
           searchable={true}
@@ -159,7 +159,6 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation }) => {
           // console.log({name: workoutName, exercises: workoutData})
         }
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
-        textStyles={{ fontSize: 20 }}
       >
         <strong>Update Workout</strong>
       </RegularButton>

@@ -57,7 +57,7 @@ const Welcome: FunctionComponent<Props> = ({ navigation }) => {
           <HeaderText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
             Track Your Fitness Progress
           </HeaderText>
-          <RegularText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>
+          <RegularText textStyles={{ width: '70%', marginBottom: 25, color: colors.green, fontSize: 15 }}>
             {'Connect with your friends\nSee how they are doing'}
           </RegularText>
           <BigText textStyles={{ width: '70%', marginBottom: 25, color: colors.green }}>

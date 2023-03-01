@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity, View, Text, ScrollView } from "react-native";
 
 // custom components
 import { Container } from "../components/shared";
@@ -16,8 +17,6 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
 // workout data
 import { workouts } from "../assets/workouts/workouts";
-import { ScrollView } from "react-native-gesture-handler";
-import { TouchableOpacity, View, Text } from "react-native";
 
 const SelectWorkoutContainer = styled(Container)`
 `;
@@ -54,7 +53,6 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
-        textStyles={{ fontSize: 20 }}
         btnStyles={{ width: '80%', margin: 20, backgroundColor: colors.green }}
       >
         <strong>Create A New Workout</strong>
@@ -62,8 +60,8 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
       {workouts.length < 0 ?
         <>
-          <RegularText textStyles={{ marginTop: 'auto', fontSize: 20, color: colors.black }}>You have no workouts</RegularText>
-          <RegularText textStyles={{ marginBottom: 'auto', fontSize: 20, color: colors.black }}>Create one to get started</RegularText>
+          <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>You have no workouts</RegularText>
+          <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>Create one to get started</RegularText>
         </>
         :
         <ScrollView style={{ width: '80%' }}>

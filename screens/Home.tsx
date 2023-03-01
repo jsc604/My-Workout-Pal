@@ -21,14 +21,12 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("SelectWorkout") }}
-        textStyles={{ fontSize: 20 }}
         btnStyles={{ width: '70%', marginTop: 20 }}
       >
         <strong>Start A New Workout</strong>
       </RegularButton>
       <RegularButton
         onPress={() => { }}
-        textStyles={{ fontSize: 20 }}
         btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.orange }}
       >
         <strong>Your Progress</strong>

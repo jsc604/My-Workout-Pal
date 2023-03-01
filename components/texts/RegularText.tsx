@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import { TextProps } from "./types";
 
 const StyledText = styled.Text`
-  font-size: 15px;
+  font-size: 20px;
   color: black;
   text-align: left;
   font-family: Inter-Regular;
