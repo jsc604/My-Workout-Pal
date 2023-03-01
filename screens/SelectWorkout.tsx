@@ -17,7 +17,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 // workout data
 import { workouts } from "../assets/workouts/workouts";
 import { ScrollView } from "react-native-gesture-handler";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 
 const SelectWorkoutContainer = styled(Container)`
 `;
@@ -28,9 +28,9 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() => { }}
-        style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', fontSize: '20px', fontFamily: 'Inter-Regular', borderRadius: 20, padding: 15 }}
+        style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
-        {workout.name}
+        <Text style={{fontSize: 20}}>{workout.name}</Text>
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             onPress={() => { }}
