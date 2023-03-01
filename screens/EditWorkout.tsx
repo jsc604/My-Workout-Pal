@@ -69,6 +69,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation }) => {
       }
       return acc;
     }, []);
+    
     setWorkoutData(newWorkoutData);
   };
   
