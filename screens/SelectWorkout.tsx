@@ -27,7 +27,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
     return (
       <TouchableOpacity
         key={i}
-        onPress={() => { }}
+        onPress={() => { navigation.navigate("StartWorkout", { name: workout.name }) }}
         style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
         <Text style={{ fontSize: 20 }}>{workout.name}</Text>

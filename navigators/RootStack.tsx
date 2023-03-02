@@ -25,7 +25,7 @@ export type RootStackParamList = {
   SelectWorkout: undefined;
   CreateWorkout: undefined;
   EditWorkout: { name: string };
-  StartWorkout: undefined;
+  StartWorkout: { name: string };
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -113,14 +113,16 @@ const RootStack: FunctionComponent = () => {
         <Stack.Screen
           name="StartWorkout"
           component={StartWorkout}
-          options={{
-            headerTitle: (props) => (
-              <Greeting
-                mainText="Start Workout"
-                {...props}
-              />
-            ),
-            headerTitleAlign: 'center'
+          options={({route}) => {
+            return ({
+              headerTitle: (props) => (
+                <Greeting 
+                  mainText={`Start ${route.params.name}`}
+                  {...props}
+                />
+              ), 
+              headerTitleAlign: 'center'
+            })
           }}
         />
       </Stack.Navigator>
