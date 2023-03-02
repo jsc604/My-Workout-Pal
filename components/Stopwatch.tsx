@@ -10,11 +10,13 @@ const Stopwatch: React.FC<StopwatchProps> = ({ startTime = 0 }) => {
   const [time, setTime] = useState(startTime);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimeRef = useRef<number>(0);
 
   useEffect(() => {
     if (isRunning) {
+      startTimeRef.current = performance.now() - time;
       intervalRef.current = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
+        setTime(performance.now() - startTimeRef.current);
       }, 10);
     } else {
       clearInterval(intervalRef.current!);
