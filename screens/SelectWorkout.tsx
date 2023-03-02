@@ -23,9 +23,10 @@ const SelectWorkoutContainer = styled(Container)`
 
 const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
-  const workoutListItems = workouts.map((workout) => {
+  const workoutListItems = workouts.map((workout, i) => {
     return (
       <TouchableOpacity
+        key={i}
         onPress={() => { }}
         style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
