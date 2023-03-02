@@ -107,7 +107,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
         />
         <RegularButton
           onPress={handleAddExercises}
-          btnStyles={{ width: '30%', marginLeft: 20 }}
+          btnStyles={{ width: '30%', marginLeft: 20, backgroundColor: colors.orange }}
         >
           +
         </RegularButton>
@@ -129,8 +129,9 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
       <RegularButton
         onPress={ 
-          () => {}
-          // console.log({name: workoutName, exercises: workoutData})
+          () => {
+            console.log({name: workoutName, exercises: workoutData})
+          }
         }
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
       >
