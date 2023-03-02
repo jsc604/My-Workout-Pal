@@ -24,7 +24,7 @@ export type RootStackParamList = {
   Home: undefined;
   SelectWorkout: undefined;
   CreateWorkout: undefined;
-  EditWorkout: undefined;
+  EditWorkout: { name: string };
   StartWorkout: undefined;
 }
 
@@ -42,7 +42,7 @@ const RootStack: FunctionComponent = () => {
             />
           )
         }}
-        initialRouteName="StartWorkout"
+        initialRouteName="SelectWorkout"
       >
         <Stack.Screen
           name="SplashScreen"
@@ -80,6 +80,7 @@ const RootStack: FunctionComponent = () => {
             ),
             headerTitleAlign: 'center'
           }}
+
         />
         <Stack.Screen
           name="CreateWorkout"
@@ -97,14 +98,16 @@ const RootStack: FunctionComponent = () => {
         <Stack.Screen
           name="EditWorkout"
           component={EditWorkout}
-          options={{
-            headerTitle: (props) => (
-              <Greeting
-                mainText="Edit Workout"
-                {...props}
-              />
-            ),
-            headerTitleAlign: 'center'
+          options={({route}) => {
+            return ({
+              headerTitle: (props) => (
+                <Greeting 
+                  mainText={`Edit ${route.params.name}`}
+                  {...props}
+                />
+              ), 
+              headerTitleAlign: 'center'
+            })
           }}
         />
         <Stack.Screen

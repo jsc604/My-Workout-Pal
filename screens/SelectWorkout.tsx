@@ -30,10 +30,10 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
         onPress={() => { }}
         style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
-        <Text style={{fontSize: 20}}>{workout.name}</Text>
-        <View style={{flexDirection: 'row'}}>
+        <Text style={{ fontSize: 20 }}>{workout.name}</Text>
+        <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={() => { navigation.navigate("EditWorkout", { name: workout.name }) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', margin: 'auto' }}
           >
             <Ionicons name="options-outline" size={30} color="black" />

@@ -51,11 +51,14 @@ interface Exercise {
   reps: number;
 }
 
-const EditWorkout: FunctionComponent<Props> = ({ navigation }) => {
-  const [workoutName, setWorkoutName] = useState(workouts[0].name);
+const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
+  const { name } = route.params;
+
+  const [workoutName, setWorkoutName] = useState(name);
   const [open, setOpen] = useState(false);
   const [exercise, setExercise] = useState<string[]>(workoutExercises);
   const [workoutData, setWorkoutData] = useState<Exercise[]>(workouts[0].exercises);
+
 
   type ExerciseArray = Array<Exercise>;
 
@@ -69,10 +72,10 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation }) => {
       }
       return acc;
     }, []);
-    
+
     setWorkoutData(newWorkoutData);
   };
-  
+
 
   const handleSetChange = (index: number, value: number) => {
     const newWorkoutData = [...workoutData];
