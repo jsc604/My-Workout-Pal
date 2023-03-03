@@ -17,8 +17,7 @@ import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
-const CreateWorkoutContainer = styled(Container)`
-`;
+const CreateWorkoutContainer = styled(Container)``;
 
 const WorkoutInputs = styled(Container)`
   margin: 20px auto;
