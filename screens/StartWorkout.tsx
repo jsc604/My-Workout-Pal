@@ -71,7 +71,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <StatusBar style="light" />
       <Stopwatch />
 
-      <ScrollView style={{ width: "80%", flex: 1 }}>
+      <ScrollView style={{ width: "90%", flex: 1 }}>
         <View style={{ alignItems: "center" }}>
           <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
             <RegularText textStyles={{ width: '40%', fontSize: 18 }}>Exercise</RegularText>
@@ -85,7 +85,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
       <RegularButton
         onPress={() => { console.log(completedWorkout) }}
-        btnStyles={{ width: '80%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
+        btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
       >
         <strong>Complete Workout</strong>
       </RegularButton>

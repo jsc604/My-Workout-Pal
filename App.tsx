@@ -40,9 +40,9 @@ export default function App() {
     prepare();
   }, []);
 
-  // if (!appIsReady || !fontsLoaded) {
-  //   return <SplashScreenAnimation/>;
-  // };
+  if (!appIsReady || !fontsLoaded) {
+    return <SplashScreenAnimation/>;
+  };
 
   return (
     <NavigationContainer>

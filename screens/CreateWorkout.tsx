@@ -115,7 +115,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
       {workoutName && <BigText>{workoutName}</BigText>}
 
       {workoutData.length > 0 &&
-        (<ScrollView style={{ width: "80%", flex: 1, marginBottom: 20 }}>
+        (<ScrollView style={{ width: "90%", flex: 1, marginBottom: 20 }}>
           <View style={{ alignItems: "center" }}>
             <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
               <RegularText textStyles={{ width: '50%' }}>Exercise</RegularText>

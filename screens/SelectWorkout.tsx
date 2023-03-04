@@ -54,7 +54,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
-        btnStyles={{ width: '80%', margin: 20, backgroundColor: colors.green }}
+        btnStyles={{ width: '90%', margin: 20, backgroundColor: colors.green }}
       >
         <strong>Create A New Workout</strong>
       </RegularButton>
@@ -65,7 +65,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
           <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>Create one to get started</RegularText>
         </>
         :
-        <ScrollView style={{ width: '80%' }}>
+        <ScrollView style={{ width: '90%' }}>
           {workoutListItems}
         </ScrollView>
       }
