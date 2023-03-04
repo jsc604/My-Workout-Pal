@@ -17,7 +17,7 @@ const LabelledInput: FunctionComponent<labelProps> = ({ label, errorMessage, tex
     <View style={styles.container}>
       <View style={styles.labelContainer}>
         <RegularText textStyles={styles.labelStyle} >{label}</RegularText>
-        <RegularText textStyles={styles.error}>{errorMessage && `*${errorMessage}*`}</RegularText>
+        <RegularText textStyles={styles.error}>{errorMessage && `*${errorMessage}`}</RegularText>
       </View>
       <TextInput
         style={styles.input}
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   labelContainer: {
+    justifyContent: 'space-between',
     flexDirection: 'row',
     marginBottom: 4,
     alignItems: 'center'
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     fontSize: 15,
-    marginLeft: 4
+    marginLeft: 4,
+    textAlign: 'center'
   },
   input: {
     borderBottomColor: colors.black,
