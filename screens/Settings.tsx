@@ -26,14 +26,16 @@ const Settings: FunctionComponent<Props> = () => {
       <RegularButton
         onPress={() => { setDarkMode(!darkMode) }}
         btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.purple }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>{darkMode ? 'Dark Mode' : 'Light Mode'}</strong>
+        {darkMode ? 'Dark Mode' : 'Light Mode'}
       </RegularButton>
       <RegularButton
-        onPress={() =>  firebase.auth().signOut()}
+        onPress={() => firebase.auth().signOut()}
         btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.pink }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>Log Out</strong>
+        Log Out
       </RegularButton>
     </SettingsContainer>
   )

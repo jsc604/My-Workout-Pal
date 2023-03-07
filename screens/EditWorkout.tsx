@@ -162,8 +162,9 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
           // console.log({name: workoutName, exercises: workoutData})
         }
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>Update Workout</strong>
+        Update Workout
       </RegularButton>
 
     </EditWorkoutContainer>

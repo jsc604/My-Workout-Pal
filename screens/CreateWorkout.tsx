@@ -133,8 +133,9 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
           }
         }
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>Create Workout</strong>
+        Create Workout
       </RegularButton>
 
     </CreateWorkoutContainer>

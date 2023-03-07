@@ -64,10 +64,10 @@ const Welcome: FunctionComponent<Props> = ({ navigation }) => {
             Keep each other motivated
           </BigText>
           <RegularButton
-            textStyles={{ color: 'black', fontSize: 25 }}
+            textStyles={{ color: 'black', fontSize: 25, fontWeight: 'bold' }}
             onPress={() => { navigation.navigate("Home") }}
           >
-            <strong>Get Started</strong>
+            Get Started
           </RegularButton>
         </BottomSection>
       </WelcomeContainer>

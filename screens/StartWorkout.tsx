@@ -86,8 +86,9 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <RegularButton
         onPress={() => { console.log(completedWorkout) }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>Complete Workout</strong>
+        Complete Workout
       </RegularButton>
     </StartWorkoutContainer>
   )

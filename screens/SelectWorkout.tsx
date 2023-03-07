@@ -55,8 +55,9 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
         btnStyles={{ width: '90%', margin: 20, backgroundColor: colors.green }}
+        textStyles={{ fontWeight: 'bold' }}
       >
-        <strong>Create A New Workout</strong>
+        Create A New Workout
       </RegularButton>
 
       {workouts.length < 0 ?
