@@ -5,7 +5,7 @@ import RegularText from "./texts/RegularText";
 
 type labelProps = {
   label: string;
-  errorMessage: string | undefined;
+  errorMessage?: string | undefined;
   text: string | undefined;
   onChangeText: (text: string) => void;
   autoComplete?: "password" | "email";
