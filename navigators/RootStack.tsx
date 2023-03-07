@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import { Ionicons } from "@expo/vector-icons";
 
 // screens
 import Welcome from "../screens/Welcome";

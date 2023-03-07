@@ -14,7 +14,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,19 +46,19 @@ export default function App() {
     prepare();
   }, []);
 
-  // useEffect(() => {
-  //   if (firebase.auth().currentUser) {
-  //     setIsAuthenticated(true);
-  //   }
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     console.log('checking auth state...');
-  //     user ? setIsAuthenticated(true) : setIsAuthenticated(false);
-  //   })
-  // })
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      setIsAuthenticated(true);
+    }
+    firebase.auth().onAuthStateChanged(user => {
+      console.log('checking auth state...');
+      user ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    })
+  })
 
-  // if (!appIsReady || !fontLoaded) {
-  //   return <SplashScreenAnimation/>;
-  // };
+  if (!appIsReady || !fontLoaded) {
+    return <SplashScreenAnimation/>;
+  };
 
   return (
     <NavigationContainer>
@@ -76,9 +76,5 @@ const firebaseConfig = {
   appId: "1:906094849199:web:dc282640bdcf515b24385a",
   measurementId: "G-9Q99QMXLWX"
 };
-
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(firebaseConfig)
-// };
 
 firebase.initializeApp(firebaseConfig);

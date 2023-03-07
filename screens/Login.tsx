@@ -45,7 +45,12 @@ const createAccount = (email: string, password: string) => {
     });
 };
 
-const login = (email: string, password: string) => { };
+const login = (email: string, password: string) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log('logged in!');
+    });
+};
 
 const Login: FunctionComponent = () => {
   const [isCreateMode, setIsCreateMode] = useState(false);

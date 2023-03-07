@@ -1,6 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
 
 // custom components
 import { Container } from "../components/shared";
@@ -28,7 +30,7 @@ const Settings: FunctionComponent<Props> = () => {
         <strong>{darkMode ? 'Dark Mode' : 'Light Mode'}</strong>
       </RegularButton>
       <RegularButton
-        onPress={() => { }}
+        onPress={() =>  firebase.auth().signOut()}
         btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.pink }}
       >
         <strong>Log Out</strong>
