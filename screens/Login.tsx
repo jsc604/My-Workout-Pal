@@ -2,6 +2,8 @@ import { FunctionComponent, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import validator from 'validator';
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
 
 // custom components
 import { Container } from "../components/shared";
@@ -35,8 +37,15 @@ const validateFields = (email: string, password: string) => {
   return isValid;
 };
 
-const createAccount = (email: string, password: string) => {};
-const login = (email: string, password: string) => {};
+const createAccount = (email: string, password: string) => {
+  firebase.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(({user}) => {
+      console.log('creating user...');
+    });
+};
+
+const login = (email: string, password: string) => { };
 
 const Login: FunctionComponent = () => {
   const [isCreateMode, setIsCreateMode] = useState(false);
@@ -48,7 +57,7 @@ const Login: FunctionComponent = () => {
     <LoginContainer>
       <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10 }}>Workout Tracker</HeaderText>
 
-      <Image source={dumbbell} style={{width: 300, height: 200, alignSelf: 'center', marginVertical: 50}}/>
+      <Image source={dumbbell} style={{ width: 300, height: 200, alignSelf: 'center', marginVertical: 50 }} />
 
       <View style={{ alignItems: 'center', flex: 1 }}>
 
@@ -91,22 +100,22 @@ const Login: FunctionComponent = () => {
               let isAllValid = true;
               if (!isValid.email) {
                 emailField.errorMessage = "Please enter a valid email";
-                setEmailField({...emailField})
+                setEmailField({ ...emailField })
                 isAllValid = false;
               }
-              
+
               if (!isValid.password) {
                 passwordField.errorMessage = "Password must be:\n8 characters long\nat least 1 uppercase\nat least 1 lowercase\nat least 1 number\nat least 1 symbol";
-                setPasswordField({...passwordField});
+                setPasswordField({ ...passwordField });
                 isAllValid = false;
               }
-              
+
               if (isCreateMode && passwordConfirmationField.text !== passwordField.text) {
                 passwordConfirmationField.errorMessage = 'Passwords do not match';
-                setPasswordConfirmationField({...passwordConfirmationField});
+                setPasswordConfirmationField({ ...passwordConfirmationField });
                 isAllValid = false;
               }
-              
+
               if (isAllValid) {
                 isCreateMode ? createAccount(emailField.text, passwordField.text) : login(emailField.text, passwordField.text);
               }

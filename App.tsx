@@ -3,8 +3,10 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
-import auth from '@react-native-firebase/auth';
-import firebase from '@react-native-firebase/app';
+// import auth from '@react-native-firebase/auth';
+// import firebase from '@react-native-firebase/app';
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
 
 // naviagtion
 import RootStack from './navigators/RootStack';
@@ -46,19 +48,19 @@ export default function App() {
     prepare();
   }, []);
 
-  // useEffect(() => {
-  //   if (auth().currentUser) {
-  //     setIsAuthenticated(true);
-  //   }
-  //   auth().onAuthStateChanged(user => {
-  //     console.log('checking auth state...');
-  //     user ? setIsAuthenticated(true) : setIsAuthenticated(false);
-  //   })
-  // })
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      setIsAuthenticated(true);
+    }
+    firebase.auth().onAuthStateChanged(user => {
+      console.log('checking auth state...');
+      user ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    })
+  })
 
-  if (!appIsReady || !fontLoaded) {
-    return <SplashScreenAnimation/>;
-  };
+  // if (!appIsReady || !fontLoaded) {
+  //   return <SplashScreenAnimation/>;
+  // };
 
   return (
     <NavigationContainer>
@@ -67,14 +69,18 @@ export default function App() {
   );
 };
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCpXclsbtv3q-E2Dd4tHjAE9pFbRKi6FeY",
-//   authDomain: "workout-tracker-c87d2.firebaseapp.com",
-//   projectId: "workout-tracker-c87d2",
-//   storageBucket: "workout-tracker-c87d2.appspot.com",
-//   messagingSenderId: "906094849199",
-//   appId: "1:906094849199:web:dc282640bdcf515b24385a",
-//   measurementId: "G-9Q99QMXLWX"
+const firebaseConfig = {
+  apiKey: "AIzaSyCpXclsbtv3q-E2Dd4tHjAE9pFbRKi6FeY",
+  authDomain: "workout-tracker-c87d2.firebaseapp.com",
+  projectId: "workout-tracker-c87d2",
+  storageBucket: "workout-tracker-c87d2.appspot.com",
+  messagingSenderId: "906094849199",
+  appId: "1:906094849199:web:dc282640bdcf515b24385a",
+  measurementId: "G-9Q99QMXLWX"
+};
+
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(firebaseConfig)
 // };
 
-// firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);

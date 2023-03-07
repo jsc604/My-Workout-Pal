@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 // screens
 import Welcome from "../screens/Welcome";
@@ -16,6 +17,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // custom components
 import { colors } from "../components/colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -35,12 +37,12 @@ const RootStack: FunctionComponent = () => {
       screenOptions={{
         headerTintColor: colors.black,
         headerRight: () => (
-          <Profile
-            imgContainerStyle={{ marginRight: 10 }}
-          />
+          <TouchableOpacity style={{ marginRight: 20 }}>
+            <Ionicons name="settings-outline" size={35} color="black" />
+          </TouchableOpacity>
         )
       }}
-      initialRouteName="Welcome"
+      initialRouteName="Home"
     >
       <Stack.Screen
         name="SplashScreen"
@@ -58,12 +60,12 @@ const RootStack: FunctionComponent = () => {
         options={{
           headerTitle: (props) => (
             <Greeting
-              mainText="Hey Bentley,"
+              mainText="Hey Michelle,"
               subText="Welcome back!"
               {...props}
             />
           ),
-          headerLeft: () => <></>
+          headerLeft: () => <></>,
         }}
       />
       <Stack.Screen
