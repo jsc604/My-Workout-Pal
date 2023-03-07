@@ -5,19 +5,20 @@ import { Ionicons } from "@expo/vector-icons";
 import Welcome from "../screens/Welcome";
 import Home from "../screens/Home";
 import Greeting from "../components/header/Greeting";
-import Profile from "../components/header/Profile";
 import SplashScreen from "../screens/SplashScreenAnimation";
 import SelectWorkout from "../screens/SelectWorkout";
 import CreateWorkout from "../screens/CreateWorkout";
 import EditWorkout from "../screens/EditWorkout";
 import StartWorkout from "../screens/StartWorkout";
+import Settings from "../screens/Settings";
 
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // custom components
 import { colors } from "../components/colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import SettingsButton from "../components/header/SettingsButton";
+import { useNavigation } from "@react-navigation/native";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -27,19 +28,20 @@ export type RootStackParamList = {
   CreateWorkout: undefined;
   EditWorkout: { name: string };
   StartWorkout: { name: string };
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack: FunctionComponent = () => {
+  const navigation = useNavigation();
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerTintColor: colors.black,
         headerRight: () => (
-          <TouchableOpacity style={{ marginRight: 20 }}>
-            <Ionicons name="settings-outline" size={35} color="black" />
-          </TouchableOpacity>
+          <SettingsButton navigation={navigation}/>
         )
       }}
       initialRouteName="Home"
@@ -123,6 +125,19 @@ const RootStack: FunctionComponent = () => {
             ),
             headerTitleAlign: 'center'
           })
+        }}
+      />
+       <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerTitle: (props) => (
+            <Greeting
+              mainText="Settings"
+              {...props}
+            />
+          ),
+          headerTitleAlign: 'center'
         }}
       />
     </Stack.Navigator>

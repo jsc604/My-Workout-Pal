@@ -3,8 +3,6 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
-// import auth from '@react-native-firebase/auth';
-// import firebase from '@react-native-firebase/app';
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
 
@@ -16,7 +14,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useEffect(() => {
@@ -48,15 +46,15 @@ export default function App() {
     prepare();
   }, []);
 
-  useEffect(() => {
-    if (firebase.auth().currentUser) {
-      setIsAuthenticated(true);
-    }
-    firebase.auth().onAuthStateChanged(user => {
-      console.log('checking auth state...');
-      user ? setIsAuthenticated(true) : setIsAuthenticated(false);
-    })
-  })
+  // useEffect(() => {
+  //   if (firebase.auth().currentUser) {
+  //     setIsAuthenticated(true);
+  //   }
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     console.log('checking auth state...');
+  //     user ? setIsAuthenticated(true) : setIsAuthenticated(false);
+  //   })
+  // })
 
   // if (!appIsReady || !fontLoaded) {
   //   return <SplashScreenAnimation/>;
