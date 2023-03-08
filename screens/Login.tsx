@@ -22,42 +22,49 @@ type inputType = {
   errorMessage?: string;
 };
 
-const validateFields = (email: string, password: string) => {
-  const isValid = {
-    email: validator.isEmail(email),
-    password: validator.isStrongPassword(password, {
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1
-    })
-  };
+const validateEmail = (email: string): boolean => {
+  return validator.isEmail(email);
+};
 
-  return isValid;
+const validatePassword = (password: string): boolean => {
+  return validator.isStrongPassword(password, {
+    minLength: 8,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSymbols: 1
+  })
 };
 
 const createAccount = (email: string, password: string) => {
   firebase.auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(({ user }) => {
-      console.log('creating user...');
-    });
-};
-
-const login = (email: string, password: string) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('logged in!');
+    .then((result) => {
+      const user = result.user;
+      if (user !== null) {
+        console.log('creating user...');
+        firebase.firestore().collection('users').doc(user.uid).set({})
+      }
     });
 };
 
 const Login: FunctionComponent = () => {
   const [isCreateMode, setIsCreateMode] = useState(false);
-  const [emailField, setEmailField] = useState<inputType>({ text: '', errorMessage: '' })
-  const [passwordField, setPasswordField] = useState<inputType>({ text: '', errorMessage: '' })
-  const [passwordConfirmationField, setPasswordConfirmationField] = useState<inputType>({ text: '', errorMessage: '' })
-  const [name, setName] = useState<inputType>({ text: '' })
+  const [emailField, setEmailField] = useState<inputType>({ text: '', errorMessage: '' });
+  const [passwordField, setPasswordField] = useState<inputType>({ text: '', errorMessage: '' });
+  const [passwordConfirmationField, setPasswordConfirmationField] = useState<inputType>({ text: '', errorMessage: '' });
+  const [nameField, setNameField] = useState<inputType>({ text: '', errorMessage: '' });
+  const [loginError, setLoginError] = useState(false);
+
+  const login = (email: string, password: string) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('logged in!');
+      })
+      .catch(() => {
+        setLoginError(true);
+      })
+  };
 
   return (
     <LoginContainer>
@@ -71,11 +78,15 @@ const Login: FunctionComponent = () => {
           {isCreateMode &&
             <LabelledInput
               label="Name"
-              text={name.text}
-              onChangeText={(text) => { setName({ text }) }}
+              text={nameField.text}
+              errorMessage={nameField.errorMessage}
+              onChangeText={(text) => { setNameField({ text }) }}
             />
           }
-
+          {loginError &&
+            <Text style={{ color: 'red', fontSize: 15, marginLeft: 4, textAlign: 'center', width: '80%' }}>
+              {'We could not find your email or password\nPlease enter valid credentials'}
+            </Text>}
           <LabelledInput
             label="Email"
             text={emailField.text}
@@ -109,35 +120,70 @@ const Login: FunctionComponent = () => {
           </TouchableOpacity>
 
           <RegularButton
+            btnStyles={{ width: '90%', backgroundColor: colors.orange, marginBottom: 20 }}
+            textStyles={{ fontSize: 22 }}
             onPress={() => {
-              if (emailField.text && passwordField.text) {
-                const isValid = validateFields(emailField.text, passwordField.text);
-                let isAllValid = true;
-                if (!isValid.email) {
+
+              if (!isCreateMode) {
+                let isLoginValid = true;
+                if (!emailField.text) {
                   emailField.errorMessage = "Please enter a valid email";
-                  setEmailField({ ...emailField })
-                  isAllValid = false;
+                  setEmailField({ ...emailField });
+                  isLoginValid = false;
                 }
-
-                if (!isValid.password) {
-                  passwordField.errorMessage = "Password must be:\n8 characters long\nat least 1 uppercase\nat least 1 lowercase\nat least 1 number\nat least 1 symbol";
+                if (!passwordField.text) {
+                  passwordField.errorMessage = "Please enter your password";
                   setPasswordField({ ...passwordField });
-                  isAllValid = false;
+                  isLoginValid = false;
                 }
+                if (emailField.text && passwordField.text) {
+                  isLoginValid && login(emailField.text, passwordField.text);
+                }
+              }
 
-                if (isCreateMode && passwordConfirmationField.text !== passwordField.text) {
+              if (isCreateMode) {
+                let isCreateValid = true;
+                if (!nameField.text) {
+                  nameField.errorMessage = 'Please enter your name';
+                  setNameField({ ...nameField });
+                  isCreateValid = false;
+                }
+                if (emailField.text) {
+                  const validEmail = validateEmail(emailField.text);
+                  if (!validEmail) {
+                    emailField.errorMessage = "Please enter a valid email";
+                    setEmailField({ ...emailField });
+                    isCreateValid = false;
+                  }
+                }
+                if (passwordField.text) {
+                  const validPassword = validatePassword(passwordField.text);
+                  if (!validPassword) {
+                    passwordField.errorMessage = "Password must be:\n8 characters long\nat least 1 uppercase\nat least 1 lowercase\nat least 1 number\nat least 1 symbol";
+                    setPasswordField({ ...passwordField });
+                    isCreateValid = false;
+                  }
+                }
+                if (!emailField.text) {
+                  emailField.errorMessage = 'Please enter an email';
+                  setEmailField({ ...emailField });
+                  isCreateValid = false;
+                }
+                if (!passwordField.text) {
+                  passwordField.errorMessage = 'Please enter a password';
+                  setPasswordField({ ...passwordField });
+                  isCreateValid = false;
+                }
+                if (!passwordConfirmationField.text || passwordConfirmationField.text !== passwordField.text) {
                   passwordConfirmationField.errorMessage = 'Passwords do not match';
                   setPasswordConfirmationField({ ...passwordConfirmationField });
-                  isAllValid = false;
+                  isCreateValid = false;
                 }
-
-                if (isAllValid) {
-                  isCreateMode ? createAccount(emailField.text, passwordField.text) : login(emailField.text, passwordField.text);
+                if (nameField.text && emailField.text && passwordField.text && passwordConfirmationField.text) {
+                  isCreateValid && createAccount(emailField.text, passwordField.text);
                 }
               }
             }}
-            btnStyles={{ width: '90%', backgroundColor: colors.orange }}
-            textStyles={{ fontSize: 22 }}
           >
             {isCreateMode ? 'Create Account' : 'Login'}
           </RegularButton>
