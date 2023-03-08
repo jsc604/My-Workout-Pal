@@ -8,7 +8,8 @@ import "firebase/compat/auth";
 
 // naviagtion
 import RootStack from './navigators/RootStack';
-import AuthStack  from "./navigators/AuthStack";
+import AuthStack from "./navigators/AuthStack";
+import DarkModeProvider from './providers/DarkModeProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,7 +31,7 @@ export default function App() {
 
     loadFonts();
   }, []);
-  
+
   useEffect(() => {
     async function prepare() {
       try {
@@ -57,13 +58,15 @@ export default function App() {
   })
 
   if (!appIsReady || !fontLoaded) {
-    return <SplashScreenAnimation/>;
+    return <SplashScreenAnimation />;
   };
 
   return (
-    <NavigationContainer>
-     { isAuthenticated ? <RootStack /> : <AuthStack /> }
-    </NavigationContainer>
+    <DarkModeProvider>
+      <NavigationContainer>
+        {isAuthenticated ? <RootStack /> : <AuthStack />}
+      </NavigationContainer>
+    </DarkModeProvider>
   );
 };
 

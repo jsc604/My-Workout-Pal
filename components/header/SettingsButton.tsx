@@ -2,10 +2,6 @@ import { FunctionComponent } from "react";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-// navigation
-import { RootStackParamList } from "../../navigators/RootStack";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
 type Props = {
   navigation: any;
 };
