@@ -3,8 +3,11 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
+
+// firebase
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
+const { initializeApp } = firebase;
 
 // naviagtion
 import RootStack from './navigators/RootStack';
@@ -80,4 +83,4 @@ const firebaseConfig = {
   measurementId: "G-9Q99QMXLWX"
 };
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);

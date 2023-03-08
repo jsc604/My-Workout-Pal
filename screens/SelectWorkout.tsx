@@ -1,8 +1,14 @@
-import { FunctionComponent } from "react";
-import { StatusBar } from "expo-status-bar";
-import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
+import { FunctionComponent, useEffect } from "react";
 import { TouchableOpacity, View, Text, ScrollView } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Ionicons } from "@expo/vector-icons";
+import styled from "styled-components/native";
+
+// firebase
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+const { firestore, auth } = firebase;
 
 // custom components
 import { Container } from "../components/shared";
@@ -18,10 +24,15 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 // workout data
 import { workouts } from "../assets/workouts/workouts";
 
+// helpers
+import { onSnapshot, addDoc, removeDoc, updateDoc } from "../helpers/onSnapshot";
+
 const SelectWorkoutContainer = styled(Container)`
 `;
 
 const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
+
+  const listsRef = firestore();
 
   const workoutListItems = workouts.map((workout, i) => {
     return (

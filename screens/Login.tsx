@@ -2,9 +2,12 @@ import { FunctionComponent, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import validator from 'validator';
+
+// firebase
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+const { auth, firestore } = firebase;
 
 // custom components
 import { Container } from "../components/shared";
@@ -46,19 +49,19 @@ const Login: FunctionComponent = () => {
   const [loginError, setLoginError] = useState(false);
 
   const createAccount = (email: string, password: string) => {
-    firebase.auth()
+    auth()
       .createUserWithEmailAndPassword(email, password)
       .then(({ user }) => {
         if (user !== null) {
           console.log('creating user...');
-          firebase.firestore().collection("users").doc(user.uid)
+          firestore().collection("users").doc(user.uid)
             .set({ name: nameField.text, email: emailField.text })
         }
       });
   };
 
   const login = (email: string, password: string) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    auth().signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('logged in!');
       })
