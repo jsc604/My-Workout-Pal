@@ -4,6 +4,7 @@ import styled from "styled-components";
 import validator from 'validator';
 import firebase from 'firebase/compat/app';
 import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 // custom components
 import { Container } from "../components/shared";
@@ -36,18 +37,6 @@ const validatePassword = (password: string): boolean => {
   })
 };
 
-const createAccount = (email: string, password: string) => {
-  firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      const user = result.user;
-      if (user !== null) {
-        console.log('creating user...');
-        firebase.firestore().collection('users').doc(user.uid).set({})
-      }
-    });
-};
-
 const Login: FunctionComponent = () => {
   const [isCreateMode, setIsCreateMode] = useState(false);
   const [emailField, setEmailField] = useState<inputType>({ text: '', errorMessage: '' });
@@ -55,6 +44,18 @@ const Login: FunctionComponent = () => {
   const [passwordConfirmationField, setPasswordConfirmationField] = useState<inputType>({ text: '', errorMessage: '' });
   const [nameField, setNameField] = useState<inputType>({ text: '', errorMessage: '' });
   const [loginError, setLoginError] = useState(false);
+
+  const createAccount = (email: string, password: string) => {
+    firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        if (user !== null) {
+          console.log('creating user...');
+          firebase.firestore().collection("users").doc(user.uid)
+            .set({ name: nameField.text, email: emailField.text })
+        }
+      });
+  };
 
   const login = (email: string, password: string) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -113,7 +114,10 @@ const Login: FunctionComponent = () => {
             />
           }
 
-          <TouchableOpacity onPress={() => setIsCreateMode(!isCreateMode)}>
+          <TouchableOpacity onPress={() => {
+            setLoginError(false);
+            setIsCreateMode(!isCreateMode);
+          }}>
             <Text style={{ fontSize: 15, color: 'blue', marginVertical: 10 }}>
               {isCreateMode ? 'Already have an account?' : 'Create a new account'}
             </Text>
