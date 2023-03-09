@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { TextInput, ScrollView, View } from "react-native";
@@ -24,7 +24,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
 // helpers
-import { addDoc, getName } from "../helpers/databaseHelpers";
+import { addDoc } from "../helpers/databaseHelpers";
 
 const CreateWorkoutContainer = styled(Container)``;
 
@@ -95,7 +95,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
       </View>
     )
   });
-  console.log(getName());
+
   return (
     <CreateWorkoutContainer>
       <StatusBar style="light" />
