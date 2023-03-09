@@ -24,7 +24,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
 // helpers
-import { addDoc } from "../helpers/onSnapshot";
+import { addDoc, getName } from "../helpers/databaseHelpers";
 
 const CreateWorkoutContainer = styled(Container)``;
 
@@ -95,7 +95,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
       </View>
     )
   });
-
+  console.log(getName());
   return (
     <CreateWorkoutContainer>
       <StatusBar style="light" />

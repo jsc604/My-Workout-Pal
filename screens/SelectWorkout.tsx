@@ -25,7 +25,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 import { workouts } from "../assets/workouts/workouts";
 
 // helpers
-import { onSnapshot, addDoc, removeDoc, updateDoc } from "../helpers/onSnapshot";
+import { onSnapshot, addDoc, removeDoc, updateDoc } from "../helpers/databaseHelpers";
 
 const SelectWorkoutContainer = styled(Container)`
 `;

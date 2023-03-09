@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 
 // screens
 import Welcome from "../screens/Welcome";
@@ -18,6 +18,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "../components/colors";
 import SettingsButton from "../components/header/SettingsButton";
 import { useNavigation } from "@react-navigation/native";
+import { getName } from "../helpers/databaseHelpers";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -34,17 +35,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack: FunctionComponent = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState<string>('');
+
+  useEffect(() => {
+    const getNameFromDB = async () => {
+      const name = await getName();
+      setName(name);
+    };
+    getNameFromDB();
+  }, []);
+
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerTintColor: colors.black,
-        headerRight: () => (
-          <SettingsButton navigation={navigation}/>
+    screenOptions={{
+      headerTintColor: colors.black,
+      headerRight: () => (
+        <SettingsButton navigation={navigation}/>
         )
       }}
-      initialRouteName="CreateWorkout"
-    >
+      initialRouteName="Home"
+      >
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -61,7 +72,7 @@ const RootStack: FunctionComponent = () => {
         options={{
           headerTitle: (props) => (
             <Greeting
-              mainText="Hey Michelle,"
+              mainText={`Hey ${name}`}
               subText="Welcome back!"
               {...props}
             />
