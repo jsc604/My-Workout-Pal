@@ -1,19 +1,7 @@
-type Exercise = {
-  exercise: string;
-  sets: number;
-  reps: number;
-};
+import { ExerciseBlock, ExerciseCluster } from "./workoutTypes";
 
-export type ExerciseSet = {
-  exercise: string;
-  sets: {
-    setIndex: number;
-    reps: number;
-    weight: number;
-  }[];
-};
 
-export const formatWorkout = (exercises: Exercise[]): ExerciseSet[] => {
+export const formatWorkout = (exercises: ExerciseBlock[]): ExerciseCluster[] => {
   return exercises.map((exercise) => {
     const sets = [];
     for (let i = 1; i <= exercise.sets; i++) {

@@ -8,7 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
-import { exercises } from "../assets/workouts/exercises";
+import { sampleExercises } from "../assets/workouts/exercises";
 import BigText from "../components/texts/BIgText";
 import RegularText from "../components/texts/RegularText";
 
@@ -19,6 +19,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "EditWorkout">;
 
 // workout data
 import { workouts } from "../assets/workouts/workouts";
+import { ExerciseBlock } from "../helpers/workoutTypes";
 const workoutExercises = workouts[0].exercises.map((item) => {
   return item.exercise;
 })
@@ -45,22 +46,16 @@ const ExerciseInput = styled(TextInput)`
   font-size: 16px;
 `;
 
-interface Exercise {
-  exercise: string;
-  sets: number;
-  reps: number;
-}
-
 const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
-  const { name } = route.params;
+  const { name, exercises } = route.params;
 
   const [workoutName, setWorkoutName] = useState(name);
   const [open, setOpen] = useState(false);
   const [exercise, setExercise] = useState<string[]>(workoutExercises);
-  const [workoutData, setWorkoutData] = useState<Exercise[]>(workouts[0].exercises);
+  const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>(workouts[0].exercises);
 
 
-  type ExerciseArray = Array<Exercise>;
+  type ExerciseArray = Array<ExerciseBlock>;
 
   const handleAddExercises = () => {
     const newWorkoutData = exercise.reduce((acc: ExerciseArray, exercise) => {
@@ -117,7 +112,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       />
       <WorkoutInputs>
         <DropDownPicker
-          items={exercises.map(exercise => ({
+          items={sampleExercises.map(exercise => ({
             label: exercise.label,
             value: exercise.label
           }))}

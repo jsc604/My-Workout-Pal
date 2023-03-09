@@ -1,4 +1,4 @@
-export const exercises = [
+export const sampleExercises = [
   { label: "Barbell Bench Press", value: "barbell-bench-press" },
   { label: "Dumbbell Bench Press", value: "dumbbell-bench-press" },
   { label: "Incline Bench Press", value: "incline-bench-press" },

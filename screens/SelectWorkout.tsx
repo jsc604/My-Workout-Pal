@@ -23,20 +23,10 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
 // helpers
 import { onSnapshot, removeDoc } from "../helpers/databaseHelpers";
+import { Workout } from "../helpers/workoutTypes";
 
 const SelectWorkoutContainer = styled(Container)`
 `;
-
-type ExerciseSet = {
-  exercise: string;
-  set: number;
-  reps: number;
-};
-
-type Workout = {
-  id: string;
-  exercises: ExerciseSet[];
-};
 
 type WorkoutListArray = Workout[];
 
@@ -73,7 +63,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
         <Text style={{ fontSize: 20 }}>{workout.id}</Text>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => { navigation.navigate("EditWorkout", { name: workout.id }) }}
+            onPress={() => { navigation.navigate("EditWorkout", { name: workout.id, exercises: workout.exercises}) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', margin: 'auto' }}
           >
             <Ionicons name="options-outline" size={30} color="black" />
@@ -102,8 +92,12 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
       {workoutList.length < 1 ?
         <>
-          <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>You have no workouts</RegularText>
-          <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>Create one to get started</RegularText>
+          <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>
+            You have no workouts
+          </RegularText>
+          <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>
+            Create one to get started
+          </RegularText>
         </>
         :
         <ScrollView style={{ width: '90%' }}>

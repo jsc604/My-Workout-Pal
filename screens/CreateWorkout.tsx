@@ -8,7 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
-import { exercises } from "../assets/workouts/exercises";
+import { sampleExercises } from "../assets/workouts/exercises";
 import BigText from "../components/texts/BIgText";
 import RegularText from "../components/texts/RegularText";
 
@@ -25,6 +25,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
 // helpers
 import { addDoc } from "../helpers/databaseHelpers";
+import { ExerciseBlock } from "../helpers/workoutTypes";
 
 const CreateWorkoutContainer = styled(Container)``;
 
@@ -47,17 +48,11 @@ const ExerciseInput = styled(TextInput)`
   font-size: 16px;
 `;
 
-interface Exercise {
-  exercise: string;
-  sets: number;
-  reps: number;
-}
-
 const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const [workoutName, setWorkoutName] = useState('');
   const [open, setOpen] = useState(false);
   const [exercise, setExercise] = useState<string[]>([]);
-  const [workoutData, setWorkoutData] = useState<Exercise[]>([]);
+  const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>([]);
 
   const listsRef = firestore()
     .collection('users')
@@ -65,7 +60,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
       .currentUser?.uid)
     .collection('workouts');
 
-  const addWorkout = (name: string, exercises: Exercise[]) => {
+  const addWorkout = (name: string, exercises: ExerciseBlock[]) => {
     addDoc(listsRef, name, { exercises })
   };
 
@@ -106,7 +101,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
       />
       <WorkoutInputs>
         <DropDownPicker
-          items={exercises.map(exercise => ({
+          items={sampleExercises.map(exercise => ({
             label: exercise.label,
             value: exercise.label
           }))}

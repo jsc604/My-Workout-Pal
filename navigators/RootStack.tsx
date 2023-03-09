@@ -1,5 +1,9 @@
 import { FunctionComponent, useState, useEffect } from "react";
 
+// react navigation
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+
 // screens
 import Welcome from "../screens/Welcome";
 import Home from "../screens/Home";
@@ -10,15 +14,14 @@ import CreateWorkout from "../screens/CreateWorkout";
 import EditWorkout from "../screens/EditWorkout";
 import StartWorkout from "../screens/StartWorkout";
 import Settings from "../screens/Settings";
-
-// react navigation
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SettingsButton from "../components/header/SettingsButton";
 
 // custom components
 import { colors } from "../components/colors";
-import SettingsButton from "../components/header/SettingsButton";
-import { useNavigation } from "@react-navigation/native";
+
+// helpers
 import { getName } from "../helpers/databaseHelpers";
+import { ExerciseBlock } from "../helpers/workoutTypes";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -26,7 +29,7 @@ export type RootStackParamList = {
   Home: undefined;
   SelectWorkout: undefined;
   CreateWorkout: undefined;
-  EditWorkout: { name: string };
+  EditWorkout: { name: string, exercises: ExerciseBlock[] };
   StartWorkout: { name: string };
   Settings: undefined;
 };
@@ -54,7 +57,7 @@ const RootStack: FunctionComponent = () => {
         <SettingsButton navigation={navigation}/>
         )
       }}
-      initialRouteName="SelectWorkout"
+      initialRouteName="Home"
       >
       <Stack.Screen
         name="SplashScreen"

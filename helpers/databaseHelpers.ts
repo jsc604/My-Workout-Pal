@@ -28,7 +28,10 @@ export const addDoc = (
     });
 };
 
-export const removeDoc = (ref, id) => {
+export const removeDoc = (
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  id: string
+) => {
   ref
     .doc(id)
     .delete()
@@ -49,14 +52,13 @@ export const updateDoc = (ref, name: string, { ...data }) => {
 export const getName = async () => {
   const userId = auth().currentUser?.uid;
   if (!userId) {
-    return '';
+    return "";
   }
   const doc = await firestore().collection("users").doc(userId).get();
   if (doc.exists) {
     const name = doc.data()?.name;
     return name;
   } else {
-    return '';
+    return "";
   }
 };
-

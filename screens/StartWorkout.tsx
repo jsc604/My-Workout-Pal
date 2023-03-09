@@ -17,7 +17,8 @@ type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 
 // workout data
 import { workouts } from "../assets/workouts/workouts";
-import { ExerciseSet, formatWorkout } from "../helpers/formatWorkout";
+import { formatWorkout } from "../helpers/formatWorkout";
+import { ExerciseCluster } from "../helpers/workoutTypes";
 
 const workoutExercises = workouts[1].exercises
 const formattedWorkout = formatWorkout(workoutExercises);
@@ -25,7 +26,7 @@ const formattedWorkout = formatWorkout(workoutExercises);
 const StartWorkoutContainer = styled(Container)``;
 
 const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
-  const [completedWorkout, setCompletedWorkout] = useState<ExerciseSet[]>(formattedWorkout);
+  const [completedWorkout, setCompletedWorkout] = useState<ExerciseCluster[]>(formattedWorkout);
 
   const workoutDataRow = workoutExercises.map((item, i) => {
     
