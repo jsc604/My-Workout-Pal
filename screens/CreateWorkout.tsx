@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { TextInput, ScrollView, View } from "react-native";
@@ -12,10 +12,19 @@ import { exercises } from "../assets/workouts/exercises";
 import BigText from "../components/texts/BIgText";
 import RegularText from "../components/texts/RegularText";
 
+// firebase
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+const { firestore, auth } = firebase;
+
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
+
+// helpers
+import { addDoc } from "../helpers/onSnapshot";
 
 const CreateWorkoutContainer = styled(Container)``;
 
@@ -49,6 +58,16 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const [open, setOpen] = useState(false);
   const [exercise, setExercise] = useState<string[]>([]);
   const [workoutData, setWorkoutData] = useState<Exercise[]>([]);
+
+  const listsRef = firestore()
+    .collection('users')
+    .doc(auth()
+      .currentUser?.uid)
+    .collection('workouts');
+
+  const addWorkout = (name: string, exercises: Exercise[]) => {
+    addDoc(listsRef, name, { exercises })
+  };
 
   const handleAddExercises = () => {
     const newWorkoutData = exercise.map(exercise => ({ exercise, sets: 0, reps: 0 }));
@@ -127,11 +146,10 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
         </ScrollView>)}
 
       <RegularButton
-        onPress={ 
-          () => {
-            console.log({name: workoutName, exercises: workoutData})
-          }
-        }
+        onPress={() => {
+          addWorkout(workoutName, workoutData);
+          navigation.navigate('SelectWorkout');
+        }}
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
         textStyles={{ fontWeight: 'bold' }}
       >

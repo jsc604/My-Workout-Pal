@@ -43,7 +43,7 @@ const RootStack: FunctionComponent = () => {
           <SettingsButton navigation={navigation}/>
         )
       }}
-      initialRouteName="Home"
+      initialRouteName="CreateWorkout"
     >
       <Stack.Screen
         name="SplashScreen"
