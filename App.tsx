@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import React, { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -74,13 +76,13 @@ export default function App() {
 };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCpXclsbtv3q-E2Dd4tHjAE9pFbRKi6FeY",
-  authDomain: "workout-tracker-c87d2.firebaseapp.com",
-  projectId: "workout-tracker-c87d2",
-  storageBucket: "workout-tracker-c87d2.appspot.com",
-  messagingSenderId: "906094849199",
-  appId: "1:906094849199:web:dc282640bdcf515b24385a",
-  measurementId: "G-9Q99QMXLWX"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 };
 
 initializeApp(firebaseConfig);
