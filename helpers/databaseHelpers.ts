@@ -3,7 +3,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 const { firestore, auth } = firebase;
 
-export const onSnapshot = (ref, callback, options) => {
+export const onSnapshot = (ref, callback, options?) => {
   ref.onSnapshot((snapshot) => {
     let items = snapshot.docs.map((doc) => {
       const data = doc.data();

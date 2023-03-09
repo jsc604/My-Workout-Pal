@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, SetStateAction, useEffect, useState } from "react";
 import { TouchableOpacity, View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,30 +21,55 @@ import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
-// workout data
-import { workouts } from "../assets/workouts/workouts";
-
 // helpers
-import { onSnapshot, addDoc, removeDoc, updateDoc } from "../helpers/databaseHelpers";
+import { onSnapshot, removeDoc } from "../helpers/databaseHelpers";
 
 const SelectWorkoutContainer = styled(Container)`
 `;
 
+type ExerciseSet = {
+  exercise: string;
+  set: number;
+  reps: number;
+};
+
+type Workout = {
+  id: string;
+  exercises: ExerciseSet[];
+};
+
+type WorkoutListArray = Workout[];
+
+
 const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
+  const [workoutList, setWorkoutList] = useState<WorkoutListArray>([]);
+  const listsRef = firestore()
+    .collection('users')
+    .doc(auth()
+      .currentUser?.uid)
+    .collection('workouts');
 
-  const listsRef = firestore();
+  useEffect(() => {
+    onSnapshot(
+      listsRef, 
+      (newlist: WorkoutListArray) => { setWorkoutList(newlist) },
+      { sort: (a: { id: string; }, b: { id: string; }) =>  a.id.localeCompare(b.id)}
+      )
+  }, []);
 
-  const workoutListItems = workouts.map((workout, i) => {
+  console.log('workoutList', workoutList);
+
+  const workoutListItems = workoutList.map((workout, i) => {
     return (
       <TouchableOpacity
         key={i}
-        onPress={() => { navigation.navigate("StartWorkout", { name: workout.name }) }}
+        onPress={() => { navigation.navigate("StartWorkout", { name: workout.id }) }}
         style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
-        <Text style={{ fontSize: 20 }}>{workout.name}</Text>
+        <Text style={{ fontSize: 20 }}>{workout.id}</Text>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => { navigation.navigate("EditWorkout", { name: workout.name }) }}
+            onPress={() => { navigation.navigate("EditWorkout", { name: workout.id }) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', margin: 'auto' }}
           >
             <Ionicons name="options-outline" size={30} color="black" />
@@ -71,7 +96,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
         Create A New Workout
       </RegularButton>
 
-      {workouts.length < 0 ?
+      {workoutList.length < 0 ?
         <>
           <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>You have no workouts</RegularText>
           <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>Create one to get started</RegularText>
