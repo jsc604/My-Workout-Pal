@@ -51,11 +51,15 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
   useEffect(() => {
     onSnapshot(
-      listsRef, 
+      listsRef,
       (newlist: WorkoutListArray) => { setWorkoutList(newlist) },
-      { sort: (a: { id: string; }, b: { id: string; }) =>  a.id.localeCompare(b.id)}
-      )
+      { sort: (a: { id: string; }, b: { id: string; }) => a.id.localeCompare(b.id) }
+    )
   }, []);
+
+  const removeItemFromList = (id: string) => {
+    removeDoc(listsRef, id);
+  };
 
   console.log('workoutList', workoutList);
 
@@ -75,7 +79,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
             <Ionicons name="options-outline" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={() => { removeItemFromList(workout.id) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}
           >
             <Ionicons name="trash-outline" size={30} color="black" />
@@ -96,7 +100,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
         Create A New Workout
       </RegularButton>
 
-      {workoutList.length < 0 ?
+      {workoutList.length < 1 ?
         <>
           <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>You have no workouts</RegularText>
           <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>Create one to get started</RegularText>
