@@ -25,6 +25,8 @@ type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
 // helpers
 import { addDoc } from "../helpers/databaseHelpers";
+
+// types
 import { ExerciseBlock } from "../helpers/workoutTypes";
 
 const CreateWorkoutContainer = styled(Container)``;

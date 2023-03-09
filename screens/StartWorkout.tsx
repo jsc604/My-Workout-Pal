@@ -18,6 +18,8 @@ type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 // workout data
 import { workouts } from "../assets/workouts/workouts";
 import { formatWorkout } from "../helpers/formatWorkout";
+
+// types
 import { ExerciseCluster } from "../helpers/workoutTypes";
 
 const workoutExercises = workouts[1].exercises

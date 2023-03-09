@@ -3,6 +3,8 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 const { firestore, auth } = firebase;
 
+import { ExerciseBlock } from "./workoutTypes";
+
 export const onSnapshot = (ref, callback, options?) => {
   ref.onSnapshot((snapshot) => {
     let items = snapshot.docs.map((doc) => {
@@ -40,7 +42,11 @@ export const removeDoc = (
     });
 };
 
-export const updateDoc = (ref, name: string, { ...data }) => {
+export const updateDoc = (
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  name: string,
+  { ...data }: { exercises: ExerciseBlock[] }
+) => {
   ref
     .doc(name)
     .set(data)

@@ -23,6 +23,8 @@ type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
 // helpers
 import { onSnapshot, removeDoc } from "../helpers/databaseHelpers";
+
+// types
 import { Workout } from "../helpers/workoutTypes";
 
 const SelectWorkoutContainer = styled(Container)`
@@ -50,9 +52,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const removeItemFromList = (id: string) => {
     removeDoc(listsRef, id);
   };
-
-  console.log('workoutList', workoutList);
-
+  
   const workoutListItems = workoutList.map((workout, i) => {
     return (
       <TouchableOpacity

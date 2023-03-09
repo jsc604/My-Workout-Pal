@@ -4,6 +4,12 @@ import styled from "styled-components/native";
 import { TextInput, ScrollView, View } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 
+// firebase
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+const { firestore, auth } = firebase;
+
 // custom components
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
@@ -17,12 +23,11 @@ import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "EditWorkout">;
 
-// workout data
-import { workouts } from "../assets/workouts/workouts";
+// types
 import { ExerciseBlock } from "../helpers/workoutTypes";
-const workoutExercises = workouts[0].exercises.map((item) => {
-  return item.exercise;
-})
+
+// helpers
+import { updateDoc } from "../helpers/databaseHelpers";
 
 const EditWorkoutContainer = styled(Container)`
 `;
@@ -48,12 +53,24 @@ const ExerciseInput = styled(TextInput)`
 
 const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const { name, exercises } = route.params;
+  const workoutExercises = exercises.map((item) => {
+    return item.exercise;
+  })
 
   const [workoutName, setWorkoutName] = useState(name);
   const [open, setOpen] = useState(false);
   const [exercise, setExercise] = useState<string[]>(workoutExercises);
-  const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>(workouts[0].exercises);
+  const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>(exercises);
 
+  const listsRef = firestore()
+    .collection('users')
+    .doc(auth()
+      .currentUser?.uid)
+    .collection('workouts');
+
+  const updateWorkout = (name: string, exercises: ExerciseBlock[]) => {
+    updateDoc(listsRef, name, { exercises });
+  };
 
   type ExerciseArray = Array<ExerciseBlock>;
 
@@ -152,10 +169,10 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
         </ScrollView>)}
 
       <RegularButton
-        onPress={
-          () => { }
-          // console.log({name: workoutName, exercises: workoutData})
-        }
+        onPress={() => {
+          updateWorkout(workoutName, workoutData);
+          navigation.navigate('SelectWorkout');
+        }}
         btnStyles={{ marginTop: 'auto', marginBottom: 30, width: '70%' }}
         textStyles={{ fontWeight: 'bold' }}
       >
