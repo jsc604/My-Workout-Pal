@@ -15,6 +15,12 @@ import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 
+// firebase
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+const { firestore, auth } = firebase;
+
 // helpers
 import { formatWorkout } from "../helpers/formatWorkout";
 const currentDate = new Date();
@@ -23,6 +29,7 @@ const formattedDate = currentDate.toLocaleDateString("en-US",
 
 // types
 import { ExerciseCluster } from "../helpers/workoutTypes";
+import { addNewWorkoutHistoryDoc } from "../helpers/databaseHelpers";
 
 const StartWorkoutContainer = styled(Container)``;
 
@@ -31,6 +38,16 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const formattedWorkout = formatWorkout(exercises);
 
   const [completedWorkout, setCompletedWorkout] = useState<ExerciseCluster[]>(formattedWorkout);
+
+  const listsRef = firestore()
+  .collection('users')
+  .doc(auth()
+    .currentUser?.uid)
+  .collection('workoutHistory');
+
+  const addHistory = (date: string, name: string, completedSets: ExerciseCluster[]) => {
+    addNewWorkoutHistoryDoc(listsRef, date, name, completedSets);
+  }
 
   const workoutDataRow = exercises.map((item, i) => {
 
@@ -64,7 +81,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       );
     }
     return (
-      <View style={{ borderBottomWidth: 1, paddingBottom: 10 }}>
+      <View key={i + 800} style={{ borderBottomWidth: 1, paddingBottom: 10 }}>
         {sets}
       </View>
     );
@@ -90,7 +107,10 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       </ScrollView>
 
       <RegularButton
-        onPress={() => { console.log({ name, completetSets: completedWorkout, date: formattedDate }) }}
+        onPress={() => {
+          addHistory(formattedDate, name, completedWorkout);
+          navigation.navigate('WorkoutHistoryList');
+         }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}
       >

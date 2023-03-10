@@ -17,7 +17,7 @@ export const onSnapshot = (ref, callback, options?) => {
   });
 };
 
-export const addDoc = (
+export const addNewWorkoutDoc = (
   ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
   name: string,
   { ...data }
@@ -27,6 +27,20 @@ export const addDoc = (
     .set(data)
     .then(() => {
       console.log("add new item");
+    });
+};
+
+export const addNewWorkoutHistoryDoc = (
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  date: string,
+  name: string,
+  { ...data }
+) => {
+  ref
+    .doc(`${date}: ${name}`)
+    .set({date, workoutName: name, completedSets: data})
+    .then(() => {
+      console.log("add new history item");
     });
 };
 

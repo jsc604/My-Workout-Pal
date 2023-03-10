@@ -24,7 +24,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "CreateWorkout">;
 
 // helpers
-import { addDoc } from "../helpers/databaseHelpers";
+import { addNewWorkoutDoc } from "../helpers/databaseHelpers";
 
 // types
 import { ExerciseBlock } from "../helpers/workoutTypes";
@@ -63,7 +63,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
     .collection('workouts');
 
   const addWorkout = (name: string, exercises: ExerciseBlock[]) => {
-    addDoc(listsRef, name, { exercises })
+    addNewWorkoutDoc(listsRef, name, { exercises })
   };
 
   const handleAddExercises = () => {

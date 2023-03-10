@@ -27,11 +27,11 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
         Start A New Workout
       </RegularButton>
       <RegularButton
-        onPress={() => { }}
+        onPress={() => { navigation.navigate('WorkoutHistoryList') }}
         btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.blue }}
         textStyles={{ fontWeight: 'bold' }}
       >
-        Previous Workouts
+        Workout History
       </RegularButton>
       <RegularButton
         onPress={() => { }}

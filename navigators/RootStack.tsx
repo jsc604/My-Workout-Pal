@@ -22,6 +22,7 @@ import { colors } from "../components/colors";
 // helpers
 import { getName } from "../helpers/databaseHelpers";
 import { ExerciseBlock } from "../helpers/workoutTypes";
+import WorkoutHistoryList from "../screens/WorkoutHistoryList";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -32,6 +33,7 @@ export type RootStackParamList = {
   EditWorkout: { name: string, exercises: ExerciseBlock[] };
   StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
+  WorkoutHistoryList: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -57,7 +59,7 @@ const RootStack: FunctionComponent = () => {
         <SettingsButton navigation={navigation}/>
         )
       }}
-      initialRouteName="SelectWorkout"
+      initialRouteName="WorkoutHistoryList"
       >
       <Stack.Screen
         name="SplashScreen"
@@ -95,7 +97,6 @@ const RootStack: FunctionComponent = () => {
           ),
           headerTitleAlign: 'center'
         }}
-
       />
       <Stack.Screen
         name="CreateWorkout"
@@ -147,6 +148,19 @@ const RootStack: FunctionComponent = () => {
           headerTitle: (props) => (
             <Greeting
               mainText="Settings"
+              {...props}
+            />
+          ),
+          headerTitleAlign: 'center'
+        }}
+      />
+       <Stack.Screen
+        name="WorkoutHistoryList"
+        component={WorkoutHistoryList}
+        options={{
+          headerTitle: (props) => (
+            <Greeting
+              mainText="Workout History"
               {...props}
             />
           ),
