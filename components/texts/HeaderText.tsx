@@ -13,7 +13,7 @@ const StyledText = styled.Text`
 
 const HeaderText: FunctionComponent<TextProps> = (props) => {
   return (
-    <StyledText style={props.textStyles}>{props.children}</StyledText>
+    <StyledText style={props.textStyles}>{props.children?.toString()}</StyledText>
   )
 };
 

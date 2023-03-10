@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
-import { TextInput, ScrollView, View } from "react-native";
+import { TextInput, ScrollView, View, Text } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 
 // custom components
@@ -85,7 +85,7 @@ const CreateWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
   const workoutDataRow = workoutData.map((item, i) => {
     return (
-      <View key={i} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
+      <View key={i + 200} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
         <RegularText textStyles={{ width: '50%' }}>{item.exercise}</RegularText>
         <ExerciseInput style={{ width: '20%', margin: 'auto' }} onChangeText={(value) => handleSetChange(i, parseInt(value))} placeholder='0' keyboardType='numeric' />
         <ExerciseInput style={{ width: '20%', margin: 'auto' }} onChangeText={(value) => handleRepChange(i, parseInt(value))} placeholder='0' keyboardType='numeric' />

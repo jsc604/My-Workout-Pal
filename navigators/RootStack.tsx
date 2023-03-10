@@ -30,7 +30,7 @@ export type RootStackParamList = {
   SelectWorkout: undefined;
   CreateWorkout: undefined;
   EditWorkout: { name: string, exercises: ExerciseBlock[] };
-  StartWorkout: { name: string };
+  StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
 };
 

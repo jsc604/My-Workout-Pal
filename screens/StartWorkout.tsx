@@ -15,23 +15,25 @@ import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 
-// workout data
-import { workouts } from "../assets/workouts/workouts";
+// helpers
 import { formatWorkout } from "../helpers/formatWorkout";
+const currentDate = new Date();
+const formattedDate = currentDate.toLocaleDateString("en-US",
+  { month: "short", day: "2-digit", year: "numeric" });
 
 // types
 import { ExerciseCluster } from "../helpers/workoutTypes";
 
-const workoutExercises = workouts[1].exercises
-const formattedWorkout = formatWorkout(workoutExercises);
-
 const StartWorkoutContainer = styled(Container)``;
 
-const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
+const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
+  const { name, exercises } = route.params;
+  const formattedWorkout = formatWorkout(exercises);
+
   const [completedWorkout, setCompletedWorkout] = useState<ExerciseCluster[]>(formattedWorkout);
 
-  const workoutDataRow = workoutExercises.map((item, i) => {
-    
+  const workoutDataRow = exercises.map((item, i) => {
+
     const handleRepChange = (exerciseName: string, setIndex: number, reps: number) => {
       const updatedExerciseSetIndex = completedWorkout.findIndex((exerciseSet) => exerciseSet.exercise === exerciseName);
       if (updatedExerciseSetIndex > -1) {
@@ -51,12 +53,12 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
     const sets = [];
     for (let j = 1; j <= item.sets; j++) {
       sets.push(
-        <View  key={i} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
+        <View key={i + j} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
           <RegularText textStyles={{ width: '40%', textAlign: 'left' }}>{j === 1 ? item.exercise : null}</RegularText>
           <View style={{ flexDirection: 'row', width: '60%' }}>
             <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%' }}>{j}</RegularText>
             <TextInput style={styles.input} onChangeText={(reps) => { handleRepChange(item.exercise, j, parseInt(reps)) }} placeholder={`${item.reps}`} keyboardType='numeric' />
-            <TextInput style={styles.input} onChangeText={(weight) => { handleWeightChange(item.exercise, j, parseInt(weight))}} placeholder='0' keyboardType='numeric' />
+            <TextInput style={styles.input} onChangeText={(weight) => { handleWeightChange(item.exercise, j, parseInt(weight)) }} placeholder='0' keyboardType='numeric' />
           </View>
         </View>
       );
@@ -74,20 +76,21 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation }) => {
       <StatusBar style="light" />
       <Stopwatch />
 
+      <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1, marginTop: 10 }}>
+        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold' }}>Exercise</RegularText>
+        <RegularText textStyles={styles.workoutHeader}>Set</RegularText>
+        <RegularText textStyles={styles.workoutHeader}>Reps</RegularText>
+        <RegularText textStyles={styles.workoutHeader}>Weight</RegularText>
+      </View>
+
       <ScrollView style={{ width: "90%", flex: 1 }}>
         <View style={{ alignItems: "center" }}>
-          <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
-            <RegularText textStyles={{ width: '40%', fontSize: 18 }}>Exercise</RegularText>
-            <RegularText textStyles={styles.workoutHeader}>Set</RegularText>
-            <RegularText textStyles={styles.workoutHeader}>Reps</RegularText>
-            <RegularText textStyles={styles.workoutHeader}>Weight</RegularText>
-          </View>
           {workoutDataRow}
         </View>
       </ScrollView>
 
       <RegularButton
-        onPress={() => { console.log(completedWorkout) }}
+        onPress={() => { console.log({ name, completetSets: completedWorkout, date: formattedDate }) }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}
       >
@@ -110,7 +113,8 @@ const styles = StyleSheet.create({
   workoutHeader: {
     width: '20%',
     textAlign: 'center',
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 });
 

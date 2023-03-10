@@ -52,12 +52,12 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const removeItemFromList = (id: string) => {
     removeDoc(listsRef, id);
   };
-  
+
   const workoutListItems = workoutList.map((workout, i) => {
     return (
       <TouchableOpacity
-        key={i}
-        onPress={() => { navigation.navigate("StartWorkout", { name: workout.id }) }}
+        key={i + 400}
+        onPress={() => { navigation.navigate("StartWorkout", { name: workout.id, exercises: workout.exercises }) }}
         style={{ marginTop: 20, backgroundColor: colors.blue, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderRadius: 20, padding: 15 }}
       >
         <Text style={{ fontSize: 20 }}>{workout.id}</Text>

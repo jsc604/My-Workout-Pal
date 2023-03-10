@@ -53,6 +53,7 @@ const ExerciseInput = styled(TextInput)`
 
 const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const { name, exercises } = route.params;
+  
   const workoutExercises = exercises.map((item) => {
     return item.exercise;
   })
@@ -103,7 +104,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
 
   const workoutDataRow = workoutData.map((item, i) => {
     return (
-      <View key={i} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
+      <View key={i + 600} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
         <RegularText textStyles={{ width: '50%' }}>{item.exercise}</RegularText>
         <ExerciseInput
           style={{ width: '20%', margin: 'auto' }}
