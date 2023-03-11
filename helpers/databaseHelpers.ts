@@ -3,16 +3,39 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 const { firestore, auth } = firebase;
 
-import { ExerciseBlock } from "./workoutTypes";
+import {
+  ExerciseBlock,
+  SetWorkoutHistoryList,
+  SetWorkoutList,
+} from "./workoutTypes";
 
-export const onSnapshot = (ref, callback, options?) => {
-  ref.onSnapshot((snapshot) => {
+export const getWorkouts = (
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  callback: SetWorkoutList
+) => {
+  ref.onSnapshot((snapshot: { docs: any[] }) => {
     let items = snapshot.docs.map((doc) => {
       const data = doc.data();
       data.id = doc.id;
       return data;
     });
-    items = options && options.sort ? items.sort(options.sort) : items;
+    items.sort((a: { id: string }, b: { id: string }) =>
+      a.id.localeCompare(b.id)
+    );
+    callback(items);
+  });
+};
+
+export const getWorkoutHistory = (
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  callback: SetWorkoutHistoryList
+) => {
+  ref.onSnapshot((snapshot: { docs: any[] }) => {
+    let items = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      data.id = doc.id;
+      return data;
+    });
     callback(items);
   });
 };
@@ -38,7 +61,7 @@ export const addNewWorkoutHistoryDoc = (
 ) => {
   ref
     .doc(`${date}: ${name}`)
-    .set({date, workoutName: name, completedSets: data})
+    .set({ date, workoutName: name, completedSets: data })
     .then(() => {
       console.log("add new history item");
     });

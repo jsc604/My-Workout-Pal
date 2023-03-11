@@ -1,4 +1,4 @@
-import { FunctionComponent, SetStateAction, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { TouchableOpacity, View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,16 +22,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
 // helpers
-import { onSnapshot, removeDoc } from "../helpers/databaseHelpers";
+import { getWorkouts, removeDoc } from "../helpers/databaseHelpers";
 
 // types
-import { Workout } from "../helpers/workoutTypes";
+import { WorkoutListArray } from "../helpers/workoutTypes";
 
-const SelectWorkoutContainer = styled(Container)`
-`;
-
-type WorkoutListArray = Workout[];
-
+const SelectWorkoutContainer = styled(Container)``;
 
 const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const [workoutList, setWorkoutList] = useState<WorkoutListArray>([]);
@@ -42,10 +38,9 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
     .collection('workouts');
 
   useEffect(() => {
-    onSnapshot(
+    getWorkouts(
       listsRef,
-      (newlist: WorkoutListArray) => { setWorkoutList(newlist) },
-      { sort: (a: { id: string; }, b: { id: string; }) => a.id.localeCompare(b.id) }
+      (newList: WorkoutListArray) => setWorkoutList(newList)
     )
   }, []);
 
@@ -63,7 +58,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
         <Text style={{ fontSize: 20 }}>{workout.id}</Text>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => { navigation.navigate("EditWorkout", { name: workout.id, exercises: workout.exercises}) }}
+            onPress={() => { navigation.navigate("EditWorkout", { name: workout.id, exercises: workout.exercises }) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', margin: 'auto' }}
           >
             <Ionicons name="options-outline" size={30} color="black" />

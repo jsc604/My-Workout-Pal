@@ -9,7 +9,7 @@ import "firebase/compat/firestore";
 const { firestore, auth } = firebase;
 
 // helpers
-import { onSnapshot } from "../helpers/databaseHelpers";
+import { getWorkoutHistory } from "../helpers/databaseHelpers";
 
 // custom components
 import { Container } from "../components/shared";
@@ -19,13 +19,13 @@ import { colors } from "../components/colors";
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { WorkoutHistoryListType } from "../helpers/workoutTypes";
 type Props = NativeStackScreenProps<RootStackParamList, "WorkoutHistoryList">;
 
-const WorkoutHistoryListContainer = styled(Container)`
-`;
+const WorkoutHistoryListContainer = styled(Container)``;
 
 const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
-  const [workoutHistoryList, setWorkoutHistoryList] = useState([]);
+  const [workoutHistoryList, setWorkoutHistoryList] = useState<WorkoutHistoryListType[]>([]);
 
   const listsRef = firestore()
     .collection('users')
@@ -35,16 +35,9 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
 
 
   useEffect(() => {
-    onSnapshot(
+    getWorkoutHistory(
       listsRef,
-      (newlist: any) => { setWorkoutHistoryList(newlist) },
-      {
-        sort: (a: { date: string; }, b: { date: string; }) => {
-          const dateA = new Date(a);
-          const dateB = new Date(b);
-          return dateA - dateB;
-        }
-      }
+      (newList: WorkoutHistoryListType[]) => setWorkoutHistoryList(newList)
     )
   }, []);
 

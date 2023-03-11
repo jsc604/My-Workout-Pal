@@ -17,3 +17,16 @@ export type Workout = {
   id: string;
   exercises: ExerciseBlock[];
 };
+
+export type WorkoutListArray = Workout[];
+
+export type SetWorkoutList = (newList: WorkoutListArray) => void;
+
+export type WorkoutHistoryListType = {
+  completedSets: ExerciseCluster[];
+  date: string;
+  id: string;
+  workoutName: string;
+};
+
+export type SetWorkoutHistoryList = (newlist: WorkoutHistoryListType[]) => void;
