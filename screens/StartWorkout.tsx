@@ -40,10 +40,10 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const [completedWorkout, setCompletedWorkout] = useState<ExerciseCluster[]>(formattedWorkout);
 
   const listsRef = firestore()
-  .collection('users')
-  .doc(auth()
-    .currentUser?.uid)
-  .collection('workoutHistory');
+    .collection('users')
+    .doc(auth()
+      .currentUser?.uid)
+    .collection('workoutHistory');
 
   const addHistory = (date: string, name: string, completedSets: ExerciseCluster[]) => {
     addNewWorkoutHistoryDoc(listsRef, date, name, completedSets);
@@ -109,8 +109,13 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       <RegularButton
         onPress={() => {
           addHistory(formattedDate, name, completedWorkout);
-          navigation.navigate('WorkoutHistoryList');
-         }}
+          navigation.navigate('WorkoutHistoryItem', {
+            date: formattedDate,
+            workoutName: name,
+            completedSets: completedWorkout,
+            fromHistory: false
+          });
+        }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}
       >

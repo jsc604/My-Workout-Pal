@@ -41,13 +41,19 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
     )
   }, []);
 
-  console.log('listsRef', workoutHistoryList);
-
   const listItems = workoutHistoryList.map((historyItem, i) => {
     return (
       <RegularButton
         key={i + 10000}
-        onPress={() => { }}
+        onPress={() => {
+          navigation.navigate('WorkoutHistoryItem',
+            {
+              date: historyItem.date,
+              workoutName: historyItem.workoutName,
+              completedSets: historyItem.completedSets,
+              fromHistory: true
+            })
+        }}
         btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.blue }}
       >
         {historyItem.id}

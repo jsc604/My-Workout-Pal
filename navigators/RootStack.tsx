@@ -1,4 +1,6 @@
 import { FunctionComponent, useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -15,14 +17,15 @@ import EditWorkout from "../screens/EditWorkout";
 import StartWorkout from "../screens/StartWorkout";
 import Settings from "../screens/Settings";
 import SettingsButton from "../components/header/SettingsButton";
+import WorkoutHistoryList from "../screens/WorkoutHistoryList";
+import WorkoutHistoryItem from "../screens/WorkoutHistoryItem";
 
 // custom components
 import { colors } from "../components/colors";
 
 // helpers
 import { getName } from "../helpers/databaseHelpers";
-import { ExerciseBlock } from "../helpers/workoutTypes";
-import WorkoutHistoryList from "../screens/WorkoutHistoryList";
+import { ExerciseBlock, ExerciseCluster } from "../helpers/workoutTypes";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -34,6 +37,7 @@ export type RootStackParamList = {
   StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
   WorkoutHistoryList: undefined;
+  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], fromHistory: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -53,14 +57,14 @@ const RootStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator
-    screenOptions={{
-      headerTintColor: colors.black,
-      headerRight: () => (
-        <SettingsButton navigation={navigation}/>
+      screenOptions={{
+        headerTintColor: colors.black,
+        headerRight: () => (
+          <SettingsButton navigation={navigation} />
         )
       }}
       initialRouteName="Home"
-      >
+    >
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -141,7 +145,7 @@ const RootStack: FunctionComponent = () => {
           })
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -154,7 +158,7 @@ const RootStack: FunctionComponent = () => {
           headerTitleAlign: 'center'
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="WorkoutHistoryList"
         component={WorkoutHistoryList}
         options={{
@@ -165,6 +169,40 @@ const RootStack: FunctionComponent = () => {
             />
           ),
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen
+        name="WorkoutHistoryItem"
+        component={WorkoutHistoryItem}
+        options={({ route, navigation }) => {
+          return route.params.fromHistory ?
+            ({
+              headerTitle: (props) => (
+                <Greeting
+                  mainText={`${route.params.date}`}
+                  {...props}
+                />
+              ),
+              headerTitleAlign: 'center',
+            })
+            :
+            ({
+              headerTitle: (props) => (
+                <Greeting
+                  mainText={`${route.params.date}`}
+                  {...props}
+                />
+              ),
+              headerTitleAlign: 'center',
+              headerLeft: () =>
+                <TouchableOpacity
+                  onPress={() => { navigation.navigate('Home') }}
+                  style={{ marginLeft: 15 }}
+                >
+                  <Ionicons name="arrow-back-outline" size={25} color={colors.black} />
+                </TouchableOpacity>
+              ,
+            })
         }}
       />
     </Stack.Navigator>

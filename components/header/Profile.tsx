@@ -48,8 +48,6 @@ const Profile: FunctionComponent<ProfileProps> = (props) => {
       quality: 1,
     })
 
-    console.log(result);
-
     if (!result.canceled && result.assets) {
       setImage(result.assets[0]);
     }
