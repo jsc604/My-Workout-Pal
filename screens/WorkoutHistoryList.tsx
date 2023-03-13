@@ -51,7 +51,6 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
               date: historyItem.date,
               workoutName: historyItem.workoutName,
               completedSets: historyItem.completedSets,
-              fromHistory: true
             })
         }}
         btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.blue }}

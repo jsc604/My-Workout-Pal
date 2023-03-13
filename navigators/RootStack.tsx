@@ -1,6 +1,4 @@
 import { FunctionComponent, useState, useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -37,7 +35,7 @@ export type RootStackParamList = {
   StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
   WorkoutHistoryList: undefined;
-  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], fromHistory: boolean };
+  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[] };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -174,36 +172,16 @@ const RootStack: FunctionComponent = () => {
       <Stack.Screen
         name="WorkoutHistoryItem"
         component={WorkoutHistoryItem}
-        options={({ route, navigation }) => {
-          return route.params.fromHistory ?
-            ({
-              headerTitle: (props) => (
-                <Greeting
-                  mainText={`${route.params.date}`}
-                  {...props}
-                />
-              ),
-              headerTitleAlign: 'center',
-            })
-            :
-            ({
-              headerTitle: (props) => (
-                <Greeting
-                  mainText={`${route.params.date}`}
-                  {...props}
-                />
-              ),
-              headerTitleAlign: 'center',
-              headerLeft: () =>
-                <TouchableOpacity
-                  onPress={() => { navigation.navigate('Home') }}
-                  style={{ marginLeft: 15 }}
-                >
-                  <Ionicons name="arrow-back-outline" size={25} color={colors.black} />
-                </TouchableOpacity>
-              ,
-              headerBackTitleVisible: false,
-            })
+        options={({ route }) => {
+          return ({
+            headerTitle: (props) => (
+              <Greeting
+                mainText={`${route.params.date}`}
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
+          })
         }}
       />
     </Stack.Navigator>

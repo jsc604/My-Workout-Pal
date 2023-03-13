@@ -33,13 +33,13 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
       >
         Workout History
       </RegularButton>
-      <RegularButton
+      {/* <RegularButton
         onPress={() => { }}
         btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.orange }}
         textStyles={{ fontWeight: 'bold' }}
       >
         Your Progress
-      </RegularButton>
+      </RegularButton> */}
     </HomeContainer>
   )
 };
