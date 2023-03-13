@@ -109,12 +109,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       <RegularButton
         onPress={() => {
           addHistory(formattedDate, name, completedWorkout);
-          navigation.navigate('WorkoutHistoryItem', {
-            date: formattedDate,
-            workoutName: name,
-            completedSets: completedWorkout,
-            fromHistory: false
-          });
+          navigation.navigate('Home');
         }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}

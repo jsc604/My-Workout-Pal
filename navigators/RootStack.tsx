@@ -202,6 +202,7 @@ const RootStack: FunctionComponent = () => {
                   <Ionicons name="arrow-back-outline" size={25} color={colors.black} />
                 </TouchableOpacity>
               ,
+              headerBackTitleVisible: false,
             })
         }}
       />
