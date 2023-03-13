@@ -20,6 +20,7 @@ import { colors } from "../components/colors";
 import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WorkoutHistoryListType } from "../helpers/workoutTypes";
+import { ScrollView } from "react-native";
 type Props = NativeStackScreenProps<RootStackParamList, "WorkoutHistoryList">;
 
 const WorkoutHistoryListContainer = styled(Container)``;
@@ -60,10 +61,12 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
     );
   })
   return (
-    <WorkoutHistoryListContainer>
-      <StatusBar style="light" />
-      {listItems}
-    </WorkoutHistoryListContainer>
+    <ScrollView>
+      <WorkoutHistoryListContainer>
+        <StatusBar style="light" />
+        {listItems}
+      </WorkoutHistoryListContainer>
+    </ScrollView>
   )
 };
 
