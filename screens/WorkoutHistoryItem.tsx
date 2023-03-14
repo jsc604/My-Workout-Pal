@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, View, StyleSheet } from "react-native";
@@ -8,6 +8,7 @@ import { Container } from "../components/shared";
 import { colors } from "../components/colors";
 import RegularText from "../components/texts/RegularText";
 import BigText from "../components/texts/BIgText";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
@@ -18,6 +19,17 @@ const WorkoutHistoryItemContainer = styled(Container)``;
 
 const WorkoutHistoryItem: FunctionComponent<Props> = ({ route }) => {
   const { workoutName, completedSets } = route.params;
+  const { darkMode } = useContext(DarkModeContext);
+
+  const styles = StyleSheet.create({
+    workoutHeader: {
+      width: '20%',
+      textAlign: 'center',
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: darkMode ? 'white' : 'black'
+    }
+  });
 
   let workoutData = [];
   for (let item in completedSets) {
@@ -30,11 +42,11 @@ const WorkoutHistoryItem: FunctionComponent<Props> = ({ route }) => {
     for (let j = 1; j <= item.sets.length; j++) {
       sets.push(
         <View key={i + j} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
-          <RegularText textStyles={{ width: '40%', textAlign: 'left' }}>{j === 1 ? item.exercise : null}</RegularText>
+          <RegularText textStyles={{ width: '40%', textAlign: 'left', color: darkMode ? 'white' : 'black' }}>{j === 1 ? item.exercise : null}</RegularText>
           <View style={{ flexDirection: 'row', width: '60%' }}>
             <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', backgroundColor: colors.green, borderRadius: 5, borderColor: 'green', borderWidth: 1 }}>{j}</RegularText>
-            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', backgroundColor: colors.blue, borderRadius: 5, borderColor: 'blue', borderWidth: 1  }}>{item.sets[j - 1].reps}</RegularText>
-            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', backgroundColor: colors.orange, borderRadius: 5, borderColor: 'orange', borderWidth: 1  }}>{item.sets[j - 1].weight}</RegularText>
+            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', backgroundColor: colors.blue, borderRadius: 5, borderColor: 'blue', borderWidth: 1 }}>{item.sets[j - 1].reps}</RegularText>
+            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', backgroundColor: colors.orange, borderRadius: 5, borderColor: 'orange', borderWidth: 1 }}>{item.sets[j - 1].weight}</RegularText>
           </View>
         </View>
       );
@@ -48,34 +60,25 @@ const WorkoutHistoryItem: FunctionComponent<Props> = ({ route }) => {
   });
 
   return (
-    <WorkoutHistoryItemContainer style={{ flex: 1, alignItems: 'center' }}>
+    <WorkoutHistoryItemContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
 
       <StatusBar style="light" />
 
-      <BigText textStyles={{ marginVertical: 20 }} >{workoutName}</BigText>
+      <BigText textStyles={{ marginVertical: 20, color: darkMode ? 'white' : 'black' }} >{workoutName}</BigText>
 
-      <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1 }}>
-        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold' }}>Exercise</RegularText>
+      <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1, borderBottomColor: darkMode ? 'white' : 'black' }}>
+        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold', color: darkMode ? 'white' : 'black' }}>Exercise</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Set</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Reps</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Weight</RegularText>
       </View>
 
       <ScrollView style={{ width: "90%", flex: 1 }}>
-          {workoutDataRow}
+        {workoutDataRow}
       </ScrollView>
 
     </WorkoutHistoryItemContainer>
   )
 };
-
-const styles = StyleSheet.create({
-  workoutHeader: {
-    width: '20%',
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: 'bold'
-  }
-});
 
 export default WorkoutHistoryItem;

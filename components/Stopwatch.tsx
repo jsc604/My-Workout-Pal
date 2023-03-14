@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 import { colors } from "./colors";
 
 type StopwatchProps = {
@@ -11,6 +12,31 @@ const Stopwatch: React.FC<StopwatchProps> = ({ startTime = 0 }) => {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(0);
+  const { darkMode } = useContext(DarkModeContext);
+
+  const styles = StyleSheet.create({
+    container: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    timer: {
+      fontSize: 48,
+      fontWeight: "bold",
+      textAlign: "center",
+      color: darkMode ? 'white' : 'black',
+    },
+    buttons: {
+      flexDirection: "row",
+    },
+    button: {
+      backgroundColor: colors.blue,
+      padding: 10,
+      margin: 8,
+      borderRadius: 4,
+      fontSize: 20,
+    },
+  });
+
 
   useEffect(() => {
     if (isRunning) {
@@ -70,27 +96,5 @@ const Stopwatch: React.FC<StopwatchProps> = ({ startTime = 0 }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  timer: {
-    fontSize: 48,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  buttons: {
-    flexDirection: "row",
-  },
-  button: {
-    backgroundColor: colors.orange,
-    padding: 10,
-    margin: 8,
-    borderRadius: 4,
-    fontSize: 20,
-  },
-});
 
 export default Stopwatch;

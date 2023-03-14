@@ -1,5 +1,6 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
+import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 
 // firebase
@@ -15,18 +16,21 @@ import { getWorkoutHistory } from "../helpers/databaseHelpers";
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { WorkoutHistoryListType } from "../helpers/workoutTypes";
-import { ScrollView } from "react-native";
 type Props = NativeStackScreenProps<RootStackParamList, "WorkoutHistoryList">;
+
+// types
+import { WorkoutHistoryListType } from "../helpers/workoutTypes";
 
 const WorkoutHistoryListContainer = styled(Container)``;
 
 const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
   const [workoutHistoryList, setWorkoutHistoryList] = useState<WorkoutHistoryListType[]>([]);
+  const { darkMode } = useContext(DarkModeContext);
 
   const listsRef = firestore()
     .collection('users')
@@ -61,7 +65,7 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
     );
   })
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
       <WorkoutHistoryListContainer>
         <StatusBar style="light" />
         {listItems}

@@ -16,7 +16,7 @@ interface DarkModeProviderProps {
 }
 
 const DarkModeProvider: FunctionComponent<DarkModeProviderProps> = (props) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const darkModeStates = { darkMode, setDarkMode };
 

@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 
@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
@@ -16,8 +17,10 @@ const HomeContainer = styled(Container)`
 `;
 
 const Home: FunctionComponent<Props> = ({ navigation }) => {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <HomeContainer>
+    <HomeContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("SelectWorkout") }}

@@ -1,11 +1,11 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import { StyleProp, TextStyle } from "react-native";
 import styled from "styled-components/native";
 
 // custom components
 import BigText from "../texts/BIgText";
 import RegularText from "../texts/RegularText";
-import { colors } from "../colors";
+import { DarkModeContext } from "../../providers/DarkModeProvider";
 
 const StyledView = styled.View`
   flex-direction: column;
@@ -22,12 +22,14 @@ interface GreetingProps {
 };
 
 const Greeting: FunctionComponent<GreetingProps> = (props) => {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
     <StyledView>
       <BigText
         textStyles={[
           {
-            color: 'black',
+            color: darkMode ? 'white' : 'black',
             fontSize: 22,
           },
           props.mainTextStyles
@@ -38,7 +40,7 @@ const Greeting: FunctionComponent<GreetingProps> = (props) => {
       <RegularText
         textStyles={[
           {
-            color: colors.black,
+            color: darkMode ? 'white' : 'black',
             fontSize: 15,
           },
           props.subTextStyles

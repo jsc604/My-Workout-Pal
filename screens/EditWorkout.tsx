@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { TextInput, ScrollView, View, TouchableOpacity } from "react-native";
@@ -15,6 +15,7 @@ import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
 import RegularText from "../components/texts/RegularText";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
@@ -40,6 +41,7 @@ const ExerciseInput = styled(TextInput)`
 
 const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const { name, exercises } = route.params;
+  const { darkMode } = useContext(DarkModeContext);
 
   const [workoutName, setWorkoutName] = useState(name);
   const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>(exercises);
@@ -85,43 +87,49 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
     return (
       <View key={i + 600} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
         <ExerciseInput
-          style={{ width: '50%' }}
+          style={{ width: '50%', color: darkMode ? 'white' : 'black' }}
           onChangeText={(value) => handleExerciseChange(i, value)}
           placeholder={item.exercise} />
         <ExerciseInput
-          style={{ width: '18%', margin: 'auto' }}
+          style={{ width: '18%', margin: 'auto', color: darkMode ? 'white' : 'black' }}
           onChangeText={(value) => handleSetChange(i, parseInt(value))}
           placeholder={`${item.sets}`}
           keyboardType='numeric' />
         <ExerciseInput
-          style={{ width: '18%', margin: 'auto' }}
+          style={{ width: '18%', margin: 'auto', color: darkMode ? 'white' : 'black' }}
           onChangeText={(value) => handleRepChange(i, parseInt(value))}
           placeholder={`${item.reps}`}
           keyboardType='numeric' />
         <TouchableOpacity onPress={() => handleDeleteRow(i)}>
-          <Ionicons name="trash-outline" size={30} color="red" />
+          <Ionicons name="trash-outline" size={30} color={colors.red} />
         </TouchableOpacity>
       </View>
     )
   });
 
   return (
-    <EditWorkoutContainer>
+    <EditWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
       <StatusBar style="light" />
-      <TextInput
+      <ExerciseInput
         onChangeText={setWorkoutName}
         placeholder={workoutName}
-        style={{ marginTop: 20, fontSize: 20, borderColor: 'black', borderWidth: 1, borderRadius: 6, textAlign: 'center' }}
+        style={{ marginTop: 20, fontSize: 20, color: darkMode ? 'white' : 'black' }}
       />
 
       {workoutData.length > 0 &&
         (<ScrollView style={{ width: "90%", flex: 1, marginBottom: 20 }}>
           <View style={{ alignItems: "center" }}>
-            <View style={{ flexDirection: 'row', width: '100%', borderBottomWidth: 1, marginTop: 10 }}>
-              <RegularText textStyles={{ width: '50%' }}>Exercise</RegularText>
-              <RegularText textStyles={{ width: '20%', textAlign: 'center' }}>Sets</RegularText>
-              <RegularText textStyles={{ width: '20%', textAlign: 'center' }}>Reps</RegularText>
-              <RegularText textStyles={{ width: '10%', textAlign: 'center' }}>-</RegularText>
+            <View style={{
+              flexDirection: 'row',
+              width: '100%',
+              borderBottomWidth: 1,
+              borderBottomColor: darkMode ? 'white' : 'black',
+              marginTop: 10
+            }}>
+              <RegularText textStyles={{ width: '50%', color: darkMode ? 'white' : 'black' }}>Exercise</RegularText>
+              <RegularText textStyles={{ width: '20%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Sets</RegularText>
+              <RegularText textStyles={{ width: '20%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Reps</RegularText>
+              <RegularText textStyles={{ width: '10%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>-</RegularText>
             </View>
             {workoutDataRow}
           </View>
@@ -130,7 +138,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
             onPress={handleAddRow}
             style={{ marginVertical: 20, width: 'fit-content', borderRadius: 999, marginHorizontal: 'auto' }}
           >
-            <Ionicons name="add-circle-outline" size={50} color={colors.black} />
+            <Ionicons name="add-circle-outline" size={50} color={darkMode ? 'white' : colors.black} />
           </TouchableOpacity>
         </ScrollView>)}
 

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useContext } from "react";
 
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -20,6 +20,7 @@ import WorkoutHistoryItem from "../screens/WorkoutHistoryItem";
 
 // custom components
 import { colors } from "../components/colors";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // helpers
 import { getName } from "../helpers/databaseHelpers";
@@ -43,6 +44,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const RootStack: FunctionComponent = () => {
   const navigation = useNavigation();
   const [name, setName] = useState<string>('');
+  const { darkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     const getNameFromDB = async () => {
@@ -56,7 +58,10 @@ const RootStack: FunctionComponent = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: colors.black,
+        headerTintColor: darkMode ? 'white' : colors.black,
+        headerStyle: {
+          backgroundColor: darkMode ? '#2d2d30' : 'white',
+        },
         headerRight: () => (
           <SettingsButton navigation={navigation} />
         )
@@ -172,7 +177,7 @@ const RootStack: FunctionComponent = () => {
       <Stack.Screen
         name="WorkoutHistoryItem"
         component={WorkoutHistoryItem}
-        options={({ route }) => {
+        options={({ route, navigation }) => {
           return ({
             headerTitle: (props) => (
               <Greeting
@@ -180,7 +185,7 @@ const RootStack: FunctionComponent = () => {
                 {...props}
               />
             ),
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
           })
         }}
       />

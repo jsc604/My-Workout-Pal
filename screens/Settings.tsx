@@ -8,11 +8,11 @@ import "firebase/compat/auth";
 import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { DarkModeContext } from "../providers/DarkModeProvider";
 type Props = NativeStackScreenProps<RootStackParamList, "Settings">;
 
 const SettingsContainer = styled(Container)`
@@ -22,7 +22,7 @@ const Settings: FunctionComponent<Props> = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   return (
-    <SettingsContainer>
+    <SettingsContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { setDarkMode(!darkMode) }}
@@ -33,7 +33,7 @@ const Settings: FunctionComponent<Props> = () => {
       </RegularButton>
       <RegularButton
         onPress={() => firebase.auth().signOut()}
-        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.pink }}
+        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.red }}
         textStyles={{ fontWeight: 'bold' }}
       >
         Log Out

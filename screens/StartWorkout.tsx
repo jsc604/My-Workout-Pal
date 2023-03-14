@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, View, TextInput, StyleSheet } from "react-native";
@@ -9,6 +9,7 @@ import { colors } from "../components/colors";
 import RegularButton from "../components/buttons/RegularButton";
 import RegularText from "../components/texts/RegularText";
 import Stopwatch from "../components/Stopwatch";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
@@ -23,21 +24,43 @@ const { firestore, auth } = firebase;
 
 // helpers
 import { formatWorkout } from "../helpers/formatWorkout";
+import { addNewWorkoutHistoryDoc } from "../helpers/databaseHelpers";
 const currentDate = new Date();
 const formattedDate = currentDate.toLocaleDateString("en-US",
   { month: "short", day: "2-digit", year: "numeric" });
 
 // types
 import { ExerciseCluster } from "../helpers/workoutTypes";
-import { addNewWorkoutHistoryDoc } from "../helpers/databaseHelpers";
 
 const StartWorkoutContainer = styled(Container)``;
 
 const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const { name, exercises } = route.params;
+  const { darkMode } = useContext(DarkModeContext);
   const formattedWorkout = formatWorkout(exercises);
 
   const [completedWorkout, setCompletedWorkout] = useState<ExerciseCluster[]>(formattedWorkout);
+
+  const styles = StyleSheet.create({
+    input: {
+      height: 40,
+      borderRadius: 5,
+      borderWidth: 1,
+      textAlign: 'center',
+      fontSize: 16,
+      width: '30%',
+      margin: 'auto',
+      color: darkMode ? 'white' : 'black',
+      borderColor: colors.black,
+    },
+    workoutHeader: {
+      width: '20%',
+      textAlign: 'center',
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: darkMode ? 'white' : 'black',
+    }
+  });
 
   const listsRef = firestore()
     .collection('users')
@@ -71,9 +94,9 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
     for (let j = 1; j <= item.sets; j++) {
       sets.push(
         <View key={i + j} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
-          <RegularText textStyles={{ width: '40%', textAlign: 'left' }}>{j === 1 ? item.exercise : null}</RegularText>
+          <RegularText textStyles={{ width: '40%', textAlign: 'left', color: darkMode ? 'white' : 'black', }}>{j === 1 ? item.exercise : null}</RegularText>
           <View style={{ flexDirection: 'row', width: '60%' }}>
-            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%' }}>{j}</RegularText>
+            <RegularText textStyles={{ margin: 'auto', textAlign: 'center', width: '30%', color: darkMode ? 'white' : 'black', }}>{j}</RegularText>
             <TextInput style={styles.input} onChangeText={(reps) => { handleRepChange(item.exercise, j, parseInt(reps)) }} placeholder={`${item.reps}`} keyboardType='numeric' />
             <TextInput style={styles.input} onChangeText={(weight) => { handleWeightChange(item.exercise, j, parseInt(weight)) }} placeholder='0' keyboardType='numeric' />
           </View>
@@ -81,20 +104,20 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       );
     }
     return (
-      <View key={i + 800} style={{ borderBottomWidth: 1, paddingBottom: 10 }}>
+      <View key={i + 800} style={{ borderBottomWidth: 1, borderColor: darkMode ? 'white' : 'black', paddingBottom: 10 }}>
         {sets}
       </View>
     );
   });
 
   return (
-    <StartWorkoutContainer style={{ flex: 1, alignItems: 'center' }}>
+    <StartWorkoutContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
 
       <StatusBar style="light" />
       <Stopwatch />
 
-      <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1, marginTop: 10 }}>
-        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold' }}>Exercise</RegularText>
+      <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1, marginTop: 10, borderColor: darkMode ? 'white' : 'black' }}>
+        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold', color: darkMode ? 'white' : 'black' }}>Exercise</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Set</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Reps</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Weight</RegularText>
@@ -109,7 +132,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       <RegularButton
         onPress={() => {
           addHistory(formattedDate, name, completedWorkout);
-          navigation.navigate('Home');
+          navigation.navigate('WorkoutHistoryList');
         }}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}
@@ -119,23 +142,5 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
     </StartWorkoutContainer>
   )
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    borderRadius: 5,
-    borderWidth: 1,
-    textAlign: 'center',
-    fontSize: 16,
-    width: '30%',
-    margin: 'auto'
-  },
-  workoutHeader: {
-    width: '20%',
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: 'bold'
-  }
-});
 
 export default StartWorkout;

@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { TouchableOpacity, View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,6 +15,7 @@ import { Container } from "../components/shared";
 import RegularButton from "../components/buttons/RegularButton";
 import RegularText from "../components/texts/RegularText";
 import { colors } from "../components/colors";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
@@ -31,6 +32,9 @@ const SelectWorkoutContainer = styled(Container)``;
 
 const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   const [workoutList, setWorkoutList] = useState<WorkoutListArray>([]);
+
+  const { darkMode } = useContext(DarkModeContext);
+
   const listsRef = firestore()
     .collection('users')
     .doc(auth()
@@ -67,7 +71,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
             onPress={() => { removeItemFromList(workout.id) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}
           >
-            <Ionicons name="trash-outline" size={30} color="black" />
+            <Ionicons name="trash-outline" size={30} color={colors.red} />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -75,7 +79,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   });
 
   return (
-    <SelectWorkoutContainer>
+    <SelectWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
       <StatusBar style="light" />
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
