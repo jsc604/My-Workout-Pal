@@ -26,7 +26,7 @@ const Settings: FunctionComponent<Props> = () => {
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { setDarkMode(!darkMode) }}
-        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.purple }}
+        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: darkMode ? '#fdfd96' : colors.purple }}
         textStyles={{ fontWeight: 'bold' }}
       >
         {darkMode ? 'Light Mode' : 'Dark Mode'}

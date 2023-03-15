@@ -41,12 +41,15 @@ export const alertDelete = (
   });
 };
 
-export const resetPassword = () => {
+export const resetPassword = (darkMode: boolean) => {
   Swal.fire({
     title: "Forgot Password",
     text: "Please enter your email address below",
     input: "email",
     icon: "question",
+    color: darkMode ? "white" : "black",
+    background: darkMode ? "#2d2d30" : "white",
+    confirmButtonColor: "green",
     reverseButtons: true,
     inputAttributes: {
       autocapitalize: "off",
@@ -63,6 +66,10 @@ export const resetPassword = () => {
       Swal.fire({
         title: "Password Reset Email Sent",
         icon: "success",
+        iconColor: 'green',
+        confirmButtonColor: "green",
+        color: darkMode ? "white" : "black",
+        background: darkMode ? "#2d2d30" : "white",
       });
     }
   });

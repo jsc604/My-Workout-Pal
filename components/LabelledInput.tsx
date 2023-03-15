@@ -1,5 +1,6 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 import { colors } from "./colors";
 import RegularText from "./texts/RegularText";
 
@@ -13,6 +14,8 @@ type labelProps = {
 };
 
 const LabelledInput: FunctionComponent<labelProps> = ({ label, errorMessage, text, onChangeText, autoComplete, secureTextEntry }) => {
+  const {darkMode} = useContext(DarkModeContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
@@ -20,7 +23,7 @@ const LabelledInput: FunctionComponent<labelProps> = ({ label, errorMessage, tex
         <RegularText textStyles={styles.error}>{errorMessage && `*${errorMessage}`}</RegularText>
       </View>
       <TextInput
-        style={styles.input}
+        style={{...styles.input, color: darkMode ? 'white' : 'black'}}
         value={text}
         onChangeText={onChangeText}
         autoComplete={autoComplete}

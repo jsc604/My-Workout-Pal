@@ -74,12 +74,8 @@ const Login: FunctionComponent = () => {
       })
   };
 
-  const sendPasswordRecovery = (email: string) => {
-    auth().sendPasswordResetEmail(email)
-  };
-  
   return (
-    <LoginContainer style={{ backgroundColor: '#2d2d30', flex: 1 }}>
+    <LoginContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
         <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red }}>Workout Tracker</HeaderText>
@@ -131,13 +127,13 @@ const Login: FunctionComponent = () => {
                 setLoginError(false);
                 setIsCreateMode(!isCreateMode);
               }}>
-              <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>
+              <Text style={{ fontSize: 15, color: darkMode ? colors.orange : 'blue', marginVertical: 10 }}>
                 {isCreateMode ? 'Already have an account?' : 'Create a new account'}
               </Text>
             </TouchableOpacity>
             {!isCreateMode &&
-              <TouchableOpacity onPress={resetPassword}>
-                <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>Forgot Password?</Text>
+              <TouchableOpacity onPress={() => resetPassword(darkMode)}>
+                <Text style={{ fontSize: 15, color: darkMode ? colors.orange : 'blue', marginVertical: 10 }}>Forgot Password?</Text>
               </TouchableOpacity>}
           </View>
 

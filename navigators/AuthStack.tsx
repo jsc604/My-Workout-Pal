@@ -1,5 +1,6 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import DarkModeToggle from "../components/header/DarkModeToggle";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // screens
 import Login from "../screens/Login";
@@ -16,13 +17,14 @@ export type AuthStackParamList = {
 const Auth = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthStack: FunctionComponent = () => {
+  const {darkMode} = useContext(DarkModeContext);
 
   return (
     <Auth.Navigator
       screenOptions={{
-        headerTintColor: 'white',
+        headerTintColor: darkMode ? 'white' : 'black',
         headerStyle: {
-          backgroundColor: '#2d2d30',
+          backgroundColor: darkMode ? '#2d2d30' : 'white',
         },
         headerRight: () => (
           <DarkModeToggle />

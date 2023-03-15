@@ -11,7 +11,7 @@ const DarkModeToggle: FunctionComponent = () => {
       style={{ marginRight: 20 }}
       onPress={() => { setDarkMode(!darkMode) }}
     >
-      <Ionicons name={darkMode ? 'sunny-outline' : 'moon-outline'} size={35} color={darkMode ? '#fdfd96' : "#2d2d30"} />
+      <Ionicons name={darkMode ? 'sunny-outline' : 'moon'} size={35} color={darkMode ? '#fdfd96' : "#2d2d30"} />
     </TouchableOpacity>
   )
 };
