@@ -37,7 +37,7 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
         Workout History
       </RegularButton>
       {/* <RegularButton
-        onPress={() => { }}
+        onPress={() => {}}
         btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.orange }}
         textStyles={{ fontWeight: 'bold' }}
       >

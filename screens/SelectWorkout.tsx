@@ -49,8 +49,8 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
     )
   }, []);
 
-  const handleDeleteItem = (id: string, command: string) => {
-    alertDelete(command, listsRef, id);
+  const handleDeleteItem = (id: string, darkMode: boolean) => {
+    alertDelete(darkMode, listsRef, id);
   };
 
   const workoutListItems = workoutList.map((workout, i) => {
@@ -69,7 +69,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
             <Ionicons name="options-outline" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => { handleDeleteItem(workout.id, 'delete',) }}
+            onPress={() => { handleDeleteItem(workout.id, darkMode) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}
           >
             <Ionicons name="trash-outline" size={30} color={colors.red} />
