@@ -6,7 +6,7 @@ import { Container } from "../components/shared";
 import dumbbell from "../assets/heavy-dumbbell-in-hand-cartoon-gym-bodybuilding-vector-13671760-removebg-preview.png";
 
 const SplashScreenContainer = styled(Container)`
-  background-color: black;
+  background-color: #2d2d30;
   width: 100%;
   height: 100%;
   justify-content: center;

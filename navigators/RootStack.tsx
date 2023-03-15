@@ -7,7 +7,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
 // screens
-import Welcome from "../screens/Welcome";
 import Home from "../screens/Home";
 import Greeting from "../components/header/Greeting";
 import SplashScreen from "../screens/SplashScreenAnimation";
@@ -30,7 +29,6 @@ import { ExerciseBlock, ExerciseCluster } from "../helpers/workoutTypes";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
-  Welcome: undefined;
   Home: undefined;
   SelectWorkout: undefined;
   CreateWorkout: undefined;
@@ -72,11 +70,6 @@ const RootStack: FunctionComponent = () => {
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Welcome"
-        component={Welcome}
         options={{ headerShown: false }}
       />
       <Stack.Screen

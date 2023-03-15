@@ -15,7 +15,14 @@ const Auth = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthStack: FunctionComponent = () => {
   return (
-    <Auth.Navigator>
+    <Auth.Navigator
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#2d2d30',
+        },
+        
+      }}>
       <Auth.Screen
         name="Login"
         component={Login}

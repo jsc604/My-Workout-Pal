@@ -74,10 +74,10 @@ const Login: FunctionComponent = () => {
   };
 
   return (
-    <LoginContainer>
+    <LoginContainer style={{backgroundColor: '#2d2d30', flex: 1}}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
-        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10 }}>Workout Tracker</HeaderText>
+        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red }}>Workout Tracker</HeaderText>
 
         <Image source={dumbbell} style={{ width: 300, height: 200, alignSelf: 'center', marginVertical: 50 }} />
 
@@ -92,7 +92,7 @@ const Login: FunctionComponent = () => {
             />
           }
           {loginError &&
-            <Text style={{ color: 'red', fontSize: 15, marginLeft: 4, textAlign: 'center', width: '80%' }}>
+            <Text style={{ color: colors.red, fontSize: 15, marginLeft: 4, textAlign: 'center', width: '80%' }}>
               {'We could not find your email or password\nPlease enter valid credentials'}
             </Text>}
           <LabelledInput
@@ -125,13 +125,13 @@ const Login: FunctionComponent = () => {
             setLoginError(false);
             setIsCreateMode(!isCreateMode);
           }}>
-            <Text style={{ fontSize: 15, color: 'blue', marginVertical: 10 }}>
+            <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>
               {isCreateMode ? 'Already have an account?' : 'Create a new account'}
             </Text>
           </TouchableOpacity>
 
           <RegularButton
-            btnStyles={{ width: '90%', backgroundColor: colors.orange, marginBottom: 20 }}
+            btnStyles={{ width: '90%', backgroundColor: colors.red, marginBottom: 20 }}
             textStyles={{ fontSize: 22 }}
             onPress={() => {
 

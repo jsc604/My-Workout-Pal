@@ -43,10 +43,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   labelStyle: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: colors.black,
   },
   error: {
-    color: 'red',
+    color: colors.red,
     fontSize: 15,
     marginLeft: 4,
     textAlign: 'center'
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     height: 32,
     fontSize: 24,
-    color: 'black'
+    color: 'white'
   }
 })
 
