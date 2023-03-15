@@ -1,6 +1,8 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import { StatusBar } from "expo-status-bar";
+import { DarkModeContext } from "../providers/DarkModeProvider";
 import validator from 'validator';
 
 // firebase
@@ -47,6 +49,7 @@ const Login: FunctionComponent = () => {
   const [passwordConfirmationField, setPasswordConfirmationField] = useState<inputType>({ text: '', errorMessage: '' });
   const [nameField, setNameField] = useState<inputType>({ text: '', errorMessage: '' });
   const [loginError, setLoginError] = useState(false);
+  const { darkMode } = useContext(DarkModeContext);
 
   const createAccount = (email: string, password: string) => {
     auth()
@@ -72,6 +75,7 @@ const Login: FunctionComponent = () => {
 
   return (
     <LoginContainer>
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
         <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10 }}>Workout Tracker</HeaderText>
 

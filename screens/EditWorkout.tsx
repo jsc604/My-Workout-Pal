@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
-import { TextInput, ScrollView, View, TouchableOpacity } from "react-native";
+import { TextInput, ScrollView, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 // firebase
@@ -46,6 +46,19 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   const [workoutName, setWorkoutName] = useState(name);
   const [workoutData, setWorkoutData] = useState<ExerciseBlock[]>(exercises);
 
+  const styles = StyleSheet.create({
+    input: {
+      height: 40,
+      borderWidth: 1,
+      borderRadius: 5,
+      borderColor: darkMode ? 'white' : 'black',
+      textAlign: 'center',
+      fontSize: 20,
+      color: darkMode ? 'white' : 'black',
+      opacity: 0.8
+    }
+  })
+
   const listsRef = firestore()
     .collection('users')
     .doc(auth()
@@ -85,22 +98,22 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
 
   const workoutDataRow = workoutData.map((item, i) => {
     return (
-      <View key={i + 600} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center' }}>
-        <ExerciseInput
-          style={{ width: '50%', color: darkMode ? 'white' : 'black' }}
+      <View key={i + 600} style={{ flexDirection: 'row', width: '100%', marginTop: 10, alignItems: 'center', justifyContent: 'space-between' }}>
+        <TextInput
+          style={{ ...styles.input, width: '50%' }}
           onChangeText={(value) => handleExerciseChange(i, value)}
           placeholder={item.exercise} />
-        <ExerciseInput
-          style={{ width: '18%', margin: 'auto', color: darkMode ? 'white' : 'black' }}
+        <TextInput
+          style={{ ...styles.input, width: '18%', margin: 'auto' }}
           onChangeText={(value) => handleSetChange(i, parseInt(value))}
           placeholder={`${item.sets}`}
           keyboardType='numeric' />
-        <ExerciseInput
-          style={{ width: '18%', margin: 'auto', color: darkMode ? 'white' : 'black' }}
+        <TextInput
+          style={{ ...styles.input, width: '18%', margin: 'auto' }}
           onChangeText={(value) => handleRepChange(i, parseInt(value))}
           placeholder={`${item.reps}`}
           keyboardType='numeric' />
-        <TouchableOpacity onPress={() => handleDeleteRow(i)}>
+        <TouchableOpacity onPress={() => handleDeleteRow(i)} style={{ width: '10%', alignItems: 'center' }}>
           <Ionicons name="trash-outline" size={30} color={colors.red} />
         </TouchableOpacity>
       </View>
@@ -109,11 +122,11 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
 
   return (
     <EditWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
-      <StatusBar style="light" />
-      <ExerciseInput
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
+      <TextInput
         onChangeText={setWorkoutName}
         placeholder={workoutName}
-        style={{ marginTop: 20, fontSize: 20, color: darkMode ? 'white' : 'black' }}
+        style={{ ...styles.input, marginTop: 20, width: '90%' }}
       />
 
       {workoutData.length > 0 &&
@@ -124,11 +137,12 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
               width: '100%',
               borderBottomWidth: 1,
               borderBottomColor: darkMode ? 'white' : 'black',
-              marginTop: 10
+              marginTop: 10,
+              justifyContent: 'space-between'
             }}>
-              <RegularText textStyles={{ width: '50%', color: darkMode ? 'white' : 'black' }}>Exercise</RegularText>
-              <RegularText textStyles={{ width: '20%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Sets</RegularText>
-              <RegularText textStyles={{ width: '20%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Reps</RegularText>
+              <RegularText textStyles={{ width: '50%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Exercise</RegularText>
+              <RegularText textStyles={{ width: '18%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Sets</RegularText>
+              <RegularText textStyles={{ width: '18%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Reps</RegularText>
               <RegularText textStyles={{ width: '10%', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>-</RegularText>
             </View>
             {workoutDataRow}

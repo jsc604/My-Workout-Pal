@@ -51,7 +51,9 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       width: '30%',
       margin: 'auto',
       color: darkMode ? 'white' : 'black',
-      borderColor: colors.black,
+      borderColor: darkMode ? 'white' : 'black',
+      marginLeft: 10,
+      opacity: 0.8
     },
     workoutHeader: {
       width: '20%',
@@ -104,7 +106,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       );
     }
     return (
-      <View key={i + 800} style={{ borderBottomWidth: 1, borderColor: darkMode ? 'white' : 'black', paddingBottom: 10 }}>
+      <View key={i + 800} style={{ borderBottomWidth: 1, borderColor: darkMode ? 'white' : 'black', paddingBottom: 10, width: '100%' }}>
         {sets}
       </View>
     );
@@ -113,11 +115,11 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   return (
     <StartWorkoutContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
 
-      <StatusBar style="light" />
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
       <Stopwatch />
 
       <View style={{ flexDirection: 'row', width: '90%', borderBottomWidth: 1, marginTop: 10, borderColor: darkMode ? 'white' : 'black' }}>
-        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold', color: darkMode ? 'white' : 'black' }}>Exercise</RegularText>
+        <RegularText textStyles={{ width: '40%', fontSize: 18, fontWeight: 'bold', color: darkMode ? 'white' : 'black', textAlign: 'center' }}>Exercise</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Set</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Reps</RegularText>
         <RegularText textStyles={styles.workoutHeader}>Weight</RegularText>

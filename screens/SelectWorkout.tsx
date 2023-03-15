@@ -23,10 +23,11 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "SelectWorkout">;
 
 // helpers
-import { getWorkouts, removeDoc } from "../helpers/databaseHelpers";
+import { getWorkouts } from "../helpers/databaseHelpers";
 
 // types
 import { WorkoutListArray } from "../helpers/workoutTypes";
+import { alertDelete } from "../helpers/confirmationAlert";
 
 const SelectWorkoutContainer = styled(Container)``;
 
@@ -48,8 +49,8 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
     )
   }, []);
 
-  const removeItemFromList = (id: string) => {
-    removeDoc(listsRef, id);
+  const handleDeleteItem = (id: string, command: string) => {
+    alertDelete(command, listsRef, id);
   };
 
   const workoutListItems = workoutList.map((workout, i) => {
@@ -68,7 +69,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
             <Ionicons name="options-outline" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => { removeItemFromList(workout.id) }}
+            onPress={() => { handleDeleteItem(workout.id, 'delete',) }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}
           >
             <Ionicons name="trash-outline" size={30} color={colors.red} />
@@ -80,7 +81,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
   return (
     <SelectWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
-      <StatusBar style="light" />
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
         btnStyles={{ width: '90%', margin: 20, backgroundColor: colors.green }}

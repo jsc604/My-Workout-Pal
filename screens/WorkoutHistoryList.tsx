@@ -66,8 +66,8 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
   })
   return (
     <ScrollView style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
-      <WorkoutHistoryListContainer>
-        <StatusBar style="light" />
+      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
+        <StatusBar style={darkMode ? 'dark' : 'light'} />
         {listItems}
       </WorkoutHistoryListContainer>
     </ScrollView>

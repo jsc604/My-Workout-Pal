@@ -54,7 +54,6 @@ const RootStack: FunctionComponent = () => {
     getNameFromDB();
   }, []);
 
-
   return (
     <Stack.Navigator
       screenOptions={{

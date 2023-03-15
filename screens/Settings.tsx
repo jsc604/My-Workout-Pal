@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useState } from "react";
+import { FunctionComponent, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import firebase from 'firebase/compat/app';
@@ -23,7 +23,7 @@ const Settings: FunctionComponent<Props> = () => {
 
   return (
     <SettingsContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
-      <StatusBar style="light" />
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { setDarkMode(!darkMode) }}
         btnStyles={{ width: '70%', marginTop: 20, backgroundColor: colors.purple }}

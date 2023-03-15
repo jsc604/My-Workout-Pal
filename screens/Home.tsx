@@ -21,7 +21,7 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
 
   return (
     <HomeContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
-      <StatusBar style="light" />
+      <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { navigation.navigate("SelectWorkout") }}
         btnStyles={{ width: '90%', marginTop: 20 }}
