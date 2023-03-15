@@ -1,8 +1,10 @@
 import { FunctionComponent, useState, useEffect, useContext } from "react";
+import { TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 // react navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 // screens
 import Welcome from "../screens/Welcome";
@@ -36,7 +38,7 @@ export type RootStackParamList = {
   StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
   WorkoutHistoryList: undefined;
-  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[] };
+  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], fromHistory: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -177,15 +179,35 @@ const RootStack: FunctionComponent = () => {
         name="WorkoutHistoryItem"
         component={WorkoutHistoryItem}
         options={({ route, navigation }) => {
-          return ({
-            headerTitle: (props) => (
-              <Greeting
-                mainText={`${route.params.date}`}
-                {...props}
-              />
-            ),
-            headerTitleAlign: 'center',
-          })
+          return route.params.fromHistory ?
+            ({
+              headerTitle: (props) => (
+                <Greeting
+                  mainText={`${route.params.date}`}
+                  {...props}
+                />
+              ),
+              headerTitleAlign: 'center',
+            })
+            :
+            ({
+              headerTitle: (props) => (
+                <Greeting
+                  mainText={`${route.params.date}`}
+                  {...props}
+                />
+              ),
+              headerTitleAlign: 'center',
+              headerLeft: () =>
+                <TouchableOpacity
+                  onPress={() => { navigation.dispatch(StackActions.popToTop()) }}
+                  style={{ marginLeft: 15 }}
+                >
+                  <Ionicons name="arrow-back-outline" size={25} color={ darkMode ? 'white' : colors.black} />
+                </TouchableOpacity>
+              ,
+              headerBackTitleVisible: false,
+            })
         }}
       />
     </Stack.Navigator>

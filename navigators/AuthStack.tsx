@@ -16,10 +16,12 @@ const Auth = createNativeStackNavigator<AuthStackParamList>();
 const AuthStack: FunctionComponent = () => {
   return (
     <Auth.Navigator>
-      <Auth.Screen 
-       name="Login"
-       component={Login}
-      //  options={{ headerShown: false }}
+      <Auth.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerTitleAlign: 'center'
+        }}
       />
     </Auth.Navigator>
   )
