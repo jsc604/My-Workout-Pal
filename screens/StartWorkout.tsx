@@ -2,6 +2,7 @@ import { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, View, TextInput, StyleSheet } from "react-native";
+import Swal from "sweetalert2";
 
 // custom components
 import { Container } from "../components/shared";
@@ -74,6 +75,41 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
     addNewWorkoutHistoryDoc(listsRef, date, name, completedSets);
   }
 
+  const alertComplete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Make sure you have completed all your sets!",
+      icon: "warning",
+      iconColor: colors.orange,
+      showCancelButton: true,
+      confirmButtonColor: "green",
+      cancelButtonColor: "red",
+      confirmButtonText: "Yes, complete it!",
+      reverseButtons: true,
+      background: darkMode ? "#2d2d30" : "white",
+      color: darkMode ? "white" : "black",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        addHistory(formattedDate, name, completedWorkout);
+        navigation.navigate('WorkoutHistoryItem', {
+          date: formattedDate,
+          workoutName: name,
+          completedSets: completedWorkout,
+          fromHistory: false
+        });
+        Swal.fire({
+          title: "Good Job!",
+          text: "Your workout has been recorded.",
+          icon: "success",
+          iconColor: "#77DD77",
+          confirmButtonColor: "green",
+          background: darkMode ? "#2d2d30" : "white",
+          color: darkMode ? "white" : "black",
+        });
+      }
+    });
+  };
+
   const workoutDataRow = exercises.map((item, i) => {
 
     const handleRepChange = (exerciseName: string, setIndex: number, reps: number) => {
@@ -132,15 +168,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       </ScrollView>
 
       <RegularButton
-        onPress={() => {
-          addHistory(formattedDate, name, completedWorkout);
-          navigation.navigate('WorkoutHistoryItem', {
-            date: formattedDate,
-            workoutName: name,
-            completedSets: completedWorkout,
-            fromHistory: false
-          });
-        }}
+        onPress={alertComplete}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}
       >

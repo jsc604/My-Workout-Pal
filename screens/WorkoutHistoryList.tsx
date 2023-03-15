@@ -1,6 +1,7 @@
 import { FunctionComponent, useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 // firebase
@@ -11,10 +12,10 @@ const { firestore, auth } = firebase;
 
 // helpers
 import { getWorkoutHistory } from "../helpers/databaseHelpers";
+import { alertDelete } from "../helpers/confirmationAlert";
 
 // custom components
 import { Container } from "../components/shared";
-import RegularButton from "../components/buttons/RegularButton";
 import { colors } from "../components/colors";
 import { DarkModeContext } from "../providers/DarkModeProvider";
 
@@ -25,6 +26,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "WorkoutHistoryList">;
 
 // types
 import { WorkoutHistoryListType } from "../helpers/workoutTypes";
+import RegularText from "../components/texts/RegularText";
 
 const WorkoutHistoryListContainer = styled(Container)``;
 
@@ -46,9 +48,13 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
     )
   }, []);
 
+  const handleDeleteItem = (id: string, darkMode: boolean) => {
+    alertDelete(darkMode, listsRef, id);
+  };
+
   const listItems = workoutHistoryList.map((historyItem, i) => {
     return (
-      <RegularButton
+      <TouchableOpacity
         key={i + 10000}
         onPress={() => {
           navigation.navigate('WorkoutHistoryItem',
@@ -59,10 +65,16 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
               fromHistory: true
             })
         }}
-        btnStyles={{ width: '90%', marginTop: 20, backgroundColor: colors.blue }}
+        style={styles.row}
       >
-        {historyItem.id}
-      </RegularButton>
+        <RegularText textStyles={{marginLeft: 10}}>{historyItem.id}</RegularText>
+        <TouchableOpacity
+          onPress={() => { handleDeleteItem(historyItem.id, darkMode) }}
+          style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
+        >
+          <Ionicons name="trash-outline" size={30} color={colors.red} />
+        </TouchableOpacity>
+      </TouchableOpacity>
     );
   })
   return (
@@ -74,5 +86,18 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
     </ScrollView>
   )
 };
+
+const styles = StyleSheet.create({
+  row: {
+    width: '90%',
+    marginTop: 20,
+    backgroundColor: colors.blue,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 10,
+  },
+});
 
 export default WorkoutHistoryList;
