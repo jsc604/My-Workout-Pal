@@ -1,6 +1,11 @@
-import firebase from "firebase/compat";
-import { removeDoc } from "./databaseHelpers";
+// firebase
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+const { auth } = firebase;
+
 import Swal from "sweetalert2";
+import { removeDoc } from "./databaseHelpers";
 import { colors } from "../components/colors";
 
 export const alertDelete = (
@@ -31,6 +36,33 @@ export const alertDelete = (
         confirmButtonColor: "green",
         background: darkMode ? "#2d2d30" : "white",
         color: darkMode ? "white" : "black",
+      });
+    }
+  });
+};
+
+export const resetPassword = () => {
+  Swal.fire({
+    title: "Forgot Password",
+    text: "Please enter your email address below",
+    input: "email",
+    icon: "question",
+    reverseButtons: true,
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Reset Password",
+    showLoaderOnConfirm: true,
+    preConfirm: (email) => {
+      auth().sendPasswordResetEmail(email);
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Password Reset Email Sent",
+        icon: "success",
       });
     }
   });

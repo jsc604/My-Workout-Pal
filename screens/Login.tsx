@@ -20,6 +20,7 @@ import LabelledInput from "../components/LabelledInput";
 
 // logo
 import dumbbell from "../assets/heavy-dumbbell-in-hand-cartoon-gym-bodybuilding-vector-13671760-removebg-preview.png";
+import { resetPassword } from "../helpers/confirmationAlert";
 
 const LoginContainer = styled(Container)``;
 
@@ -73,8 +74,12 @@ const Login: FunctionComponent = () => {
       })
   };
 
+  const sendPasswordRecovery = (email: string) => {
+    auth().sendPasswordResetEmail(email)
+  };
+  
   return (
-    <LoginContainer style={{backgroundColor: '#2d2d30', flex: 1}}>
+    <LoginContainer style={{ backgroundColor: '#2d2d30', flex: 1 }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
         <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red }}>Workout Tracker</HeaderText>
@@ -120,15 +125,21 @@ const Login: FunctionComponent = () => {
               secureTextEntry={true}
             />
           }
-
-          <TouchableOpacity onPress={() => {
-            setLoginError(false);
-            setIsCreateMode(!isCreateMode);
-          }}>
-            <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>
-              {isCreateMode ? 'Already have an account?' : 'Create a new account'}
-            </Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', width: '90%', justifyContent: isCreateMode ? 'center' : 'space-between' }}>
+            <TouchableOpacity
+              onPress={() => {
+                setLoginError(false);
+                setIsCreateMode(!isCreateMode);
+              }}>
+              <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>
+                {isCreateMode ? 'Already have an account?' : 'Create a new account'}
+              </Text>
+            </TouchableOpacity>
+            {!isCreateMode &&
+              <TouchableOpacity onPress={resetPassword}>
+                <Text style={{ fontSize: 15, color: colors.orange, marginVertical: 10 }}>Forgot Password?</Text>
+              </TouchableOpacity>}
+          </View>
 
           <RegularButton
             btnStyles={{ width: '90%', backgroundColor: colors.red, marginBottom: 20 }}
