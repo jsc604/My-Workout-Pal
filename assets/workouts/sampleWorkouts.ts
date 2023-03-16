@@ -1,4 +1,4 @@
-export const workouts = [
+export const sampleWorkouts = [
   {
     name: 'Chest Day',
     exercises: [
