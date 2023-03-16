@@ -1,6 +1,8 @@
 # Workout Tracker
 Welcome to Workout Tracker, the ultimate fitness companion built using Expo, React Native,TypeScript, and Firebase. With Workout Tracker, you can create and track your workouts like never before, all while enjoying a beautiful and intuitive user interface. 
 
+The app is built for mobile use so larger desktop screens may experience a stretched display.
+
 Here is a link to the [Workout Tracker](https://workouttracker-2da55.web.app/)
 
 # Features
