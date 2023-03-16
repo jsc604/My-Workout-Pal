@@ -67,7 +67,7 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
         }}
         style={styles.row}
       >
-        <RegularText textStyles={{marginLeft: 10}}>{historyItem.id}</RegularText>
+        <RegularText textStyles={{ marginLeft: 10 }}>{historyItem.id}</RegularText>
         <TouchableOpacity
           onPress={() => { handleDeleteItem(historyItem.id, darkMode) }}
           style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
@@ -77,6 +77,21 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
       </TouchableOpacity>
     );
   })
+
+  if (workoutHistoryList.length < 1) {
+    return (
+      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+        <StatusBar style={darkMode ? 'dark' : 'light'} />
+        <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>
+          You have not completed
+        </RegularText>
+        <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>
+          any workouts
+        </RegularText>
+      </WorkoutHistoryListContainer>
+    )
+  };
+
   return (
     <ScrollView style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
       <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
