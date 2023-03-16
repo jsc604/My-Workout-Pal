@@ -76,7 +76,7 @@ const Login: FunctionComponent = () => {
     <LoginContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
-        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red, width: '80%', marginHorizontal: 'auto' }}>Track My Workouts</HeaderText>
+        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red, width: '80%', marginHorizontal: 'auto' }}>Workout Tracker</HeaderText>
 
         <Image source={dumbbell} style={{ width: 300, height: 200, alignSelf: 'center', marginVertical: 50 }} />
 

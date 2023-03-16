@@ -1,4 +1,4 @@
-import { apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, measurementId } from "@env" 
+import { apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, measurementId } from "@env"
 
 import React, { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
@@ -31,9 +31,9 @@ export default function App() {
     appId: appId,
     measurementId: measurementId
   };
-  
+
   initializeApp(firebaseConfig);
-  
+
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
