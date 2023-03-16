@@ -29,7 +29,6 @@ export default function App() {
         'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
         'Inter-Bold': require('./assets/fonts/Inter-Bold.otf'),
         'Inter-Regular': require('./assets/fonts/Inter-Regular.otf'),
-        'Inter-Light': require('./assets/fonts/Inter-Light.otf'),
       });
       setFontLoaded(true);
     }
