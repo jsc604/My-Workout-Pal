@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { DarkModeContext } from "../providers/DarkModeProvider";
 import { colors } from "./colors";

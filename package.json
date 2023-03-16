@@ -35,7 +35,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-sweet-alert": "^3.5.0",
     "react-native-web": "~0.18.9",
-    "styled-components": "^5.3.6",
+    "styled-components": "^5.3.9",
     "sweetalert2": "^11.7.3",
     "validator": "^13.9.0"
   },

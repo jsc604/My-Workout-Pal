@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { ImageSourcePropType, GestureResponderEvent, StyleProp, ViewStyle, ImageStyle, TouchableOpacity, Image, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import styled from "styled-components/native";

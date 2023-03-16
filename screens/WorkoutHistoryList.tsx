@@ -1,3 +1,4 @@
+import React from "react";
 import { FunctionComponent, useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
@@ -5,9 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { firestore, auth } = firebase;
 
 // helpers

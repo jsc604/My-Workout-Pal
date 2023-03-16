@@ -1,8 +1,7 @@
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
+import firebase from '../node_modules/firebase/compat/';
 
 // custom components
 import { Container } from "../components/shared";

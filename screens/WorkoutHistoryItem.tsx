@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, View, StyleSheet } from "react-native";

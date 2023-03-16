@@ -1,13 +1,11 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { TouchableOpacity, View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { firestore, auth } = firebase;
 
 // custom components

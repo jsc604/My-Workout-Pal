@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import DarkModeToggle from "../components/header/DarkModeToggle";
 import { DarkModeContext } from "../providers/DarkModeProvider";
 

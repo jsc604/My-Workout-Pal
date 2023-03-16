@@ -1,13 +1,11 @@
-import { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { TextInput, ScrollView, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { firestore, auth } = firebase;
 
 // custom components
@@ -29,14 +27,6 @@ import { ExerciseBlock } from "../helpers/workoutTypes";
 import { updateDoc } from "../helpers/databaseHelpers";
 
 const EditWorkoutContainer = styled(Container)`
-`;
-
-const ExerciseInput = styled(TextInput)`
-  height: 40px;
-  border: 1px solid ${colors.black};
-  border-radius: 5px;
-  text-align: center;
-  font-size: 16px;
 `;
 
 const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {

@@ -1,7 +1,5 @@
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { auth } = firebase;
 
 import Swal from "sweetalert2";

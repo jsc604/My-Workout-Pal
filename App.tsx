@@ -8,7 +8,6 @@ import { NavigationContainer } from "@react-navigation/native";
 
 // firebase
 import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
 const { initializeApp } = firebase;
 
 // naviagtion

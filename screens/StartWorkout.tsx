@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, View, TextInput, StyleSheet } from "react-native";
@@ -18,9 +18,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { firestore, auth } = firebase;
 
 // helpers

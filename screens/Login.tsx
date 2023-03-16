@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import { StatusBar } from "expo-status-bar";
@@ -6,9 +6,7 @@ import { DarkModeContext } from "../providers/DarkModeProvider";
 import validator from 'validator';
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat/';
 const { auth, firestore } = firebase;
 
 // custom components

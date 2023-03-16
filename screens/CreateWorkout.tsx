@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { TextInput, ScrollView, View, TouchableOpacity, StyleSheet } from "react-native";
@@ -12,9 +12,7 @@ import RegularText from "../components/texts/RegularText";
 import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // firebase
-import firebase from 'firebase/compat/app';
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import firebase from '../node_modules/firebase/compat';
 const { firestore, auth } = firebase;
 
 // navigation

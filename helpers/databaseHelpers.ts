@@ -1,6 +1,4 @@
-import firebase from "firebase/compat";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import firebase from '../node_modules/firebase/compat/';
 const { firestore, auth } = firebase;
 
 import {

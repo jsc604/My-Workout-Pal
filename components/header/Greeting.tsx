@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { StyleProp, TextStyle } from "react-native";
 import styled from "styled-components/native";
 

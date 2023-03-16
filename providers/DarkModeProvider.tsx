@@ -1,4 +1,4 @@
-import { useState, createContext, FunctionComponent, ReactNode } from "react";
+import React, { useState, createContext, FunctionComponent, ReactNode } from "react";
 
 export type DarkModeContextType = {
   darkMode: boolean;
