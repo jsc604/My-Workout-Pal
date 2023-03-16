@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 // firebase
 import firebase from 'firebase/compat/app';
-const { initializeApp } = firebase;
+const { initializeApp, auth } = firebase;
 
 // naviagtion
 import RootStack from './navigators/RootStack';
@@ -22,6 +22,18 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  const firebaseConfig = {
+    apiKey: apiKey,
+    authDomain: authDomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
+    measurementId: measurementId
+  };
+  
+  initializeApp(firebaseConfig);
+  
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
@@ -51,7 +63,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (firebase.auth().currentUser) {
+    if (auth().currentUser) {
       setIsAuthenticated(true);
     }
     firebase.auth().onAuthStateChanged(user => {
@@ -72,15 +84,3 @@ export default function App() {
     </DarkModeProvider>
   );
 };
-
-const firebaseConfig = {
-  apiKey: apiKey,
-  authDomain: authDomain,
-  projectId: projectId,
-  storageBucket: storageBucket,
-  messagingSenderId: messagingSenderId,
-  appId: appId,
-  measurementId: measurementId
-};
-
-initializeApp(firebaseConfig);
