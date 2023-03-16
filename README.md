@@ -16,11 +16,9 @@ Here is a link to the [Workout Tracker](https://workouttracker-2da55.web.app/)
 * Firebase - a comprehensive suite of backend services that handles data storage, authentication, and more
 
 # Screenshots and Demo
+![GIF login + signup]()
 
-**General Functionality:**
-![GIF login + signup](https://github.com/jsc604/Workout-Tracker/blob/main/docs/ezgif-4-9e4db8e748.gif?raw=true)
-
-![GIF General function](https://github.com/jsc604/Workout-Tracker/blob/main/docs/ezgif-4-561af8e1bf.gif?raw=true)
+![GIF General function]()
 
 !["login and create workout"](https://github.com/jsc604/Workout-Tracker/blob/main/docs/Screenshot%202023-03-16%20at%203.24.56%20PM.png?raw=true)
 
