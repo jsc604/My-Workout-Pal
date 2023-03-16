@@ -14,8 +14,8 @@ const SplashScreenContainer = styled(Container)`
 `;
 
 const SplashScreenImage = styled.Image<{ rotate: string }>`
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
   flex: 1;
   resize-mode: contain;
   transform: ${({ rotate }) => rotate};
