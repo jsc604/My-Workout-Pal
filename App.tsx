@@ -5,8 +5,8 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
-import { ScreenHeight } from "./components/shared";
 const { width } = Dimensions.get('window');
+import DarkModeProvider from './providers/DarkModeProvider';
 
 // firebase
 import firebase from 'firebase/compat/app';
@@ -15,7 +15,6 @@ const { initializeApp, auth } = firebase;
 // naviagtion
 import RootStack from './navigators/RootStack';
 import AuthStack from "./navigators/AuthStack";
-import DarkModeProvider from './providers/DarkModeProvider';
 import { StyleSheet, View, Dimensions } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
@@ -48,6 +47,7 @@ export default function App() {
     }
 
     loadFonts();
+
   }, []);
 
   useEffect(() => {
@@ -61,7 +61,6 @@ export default function App() {
         SplashScreen.hideAsync();
       }
     }
-
     prepare();
   }, []);
 
@@ -81,10 +80,12 @@ export default function App() {
 
   return (
     <DarkModeProvider>
-      <View style={styles.screen}>
-        <NavigationContainer>
-          {isAuthenticated ? <RootStack /> : <AuthStack />}
-        </NavigationContainer>
+      <View style={{ backgroundColor: '#2d2d30', flex: 1 }}>
+        <View style={styles.screen}>
+          <NavigationContainer>
+            {isAuthenticated ? <RootStack /> : <AuthStack />}
+          </NavigationContainer>
+        </View>
       </View>
     </DarkModeProvider>
   );
