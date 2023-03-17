@@ -5,6 +5,8 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
+import { ScreenHeight } from "./components/shared";
+const { width } = Dimensions.get('window');
 
 // firebase
 import firebase from 'firebase/compat/app';
@@ -14,6 +16,7 @@ const { initializeApp, auth } = firebase;
 import RootStack from './navigators/RootStack';
 import AuthStack from "./navigators/AuthStack";
 import DarkModeProvider from './providers/DarkModeProvider';
+import { StyleSheet, View, Dimensions } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -78,9 +81,19 @@ export default function App() {
 
   return (
     <DarkModeProvider>
-      <NavigationContainer>
-        {isAuthenticated ? <RootStack /> : <AuthStack />}
-      </NavigationContainer>
+      <View style={styles.screen}>
+        <NavigationContainer>
+          {isAuthenticated ? <RootStack /> : <AuthStack />}
+        </NavigationContainer>
+      </View>
     </DarkModeProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  screen: {
+    margin: 'auto',
+    width: width >= 820 ? 820 : '100%',
+    height: '100%',
+  },
+});
