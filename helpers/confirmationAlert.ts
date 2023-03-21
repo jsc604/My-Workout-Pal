@@ -45,7 +45,8 @@ export const alertUpdate = (
   oldDoc: string,
   date: string,
   workoutName: string,
-  { ...data }
+  { ...data },
+  callback: () => void
 ) => {
   Swal.fire({
     title: "Are you sure?",
@@ -62,12 +63,13 @@ export const alertUpdate = (
   }).then((result) => {
     if (result.isConfirmed) {
       const newDocRef = ref.doc(`${date}: ${workoutName}`);
-      newDocRef.set(data).then(() => {
-        removeDoc(ref, oldDoc);
-        console.log(`updated item: ${oldDoc}`);
-      });
+      newDocRef.set({completedSets: data, workoutName, date});
+      removeDoc(ref, oldDoc);
+      callback();
+      console.log(`updated item: ${oldDoc}`);
+
       Swal.fire({
-        title: "Deleted!",
+        title: "Updated!",
         text: "Your workout has been updated.",
         icon: "success",
         iconColor: "#77DD77",
