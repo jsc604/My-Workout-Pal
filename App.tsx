@@ -74,9 +74,9 @@ export default function App() {
     })
   })
 
-  // if (!appIsReady || !fontLoaded) {
-  //   return <SplashScreenAnimation />;
-  // };
+  if (!appIsReady || !fontLoaded) {
+    return <SplashScreenAnimation />;
+  };
 
   return (
     <DarkModeProvider>
