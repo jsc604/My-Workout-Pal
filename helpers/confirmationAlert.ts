@@ -3,8 +3,47 @@ import firebase from "../node_modules/firebase/compat/";
 const { auth } = firebase;
 
 import Swal from "sweetalert2";
-import { removeDoc } from "./databaseHelpers";
+import { addNewWorkoutHistoryDoc, removeDoc } from "./databaseHelpers";
 import { colors } from "../components/colors";
+import { ExerciseCluster } from "./workoutTypes";
+
+export const alertComplete = (
+  listsRef: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  date: string,
+  workoutName: string,
+  completedSets: ExerciseCluster[],
+  darkMode: boolean,
+  navigation: () => void
+) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Make sure you have completed all your sets!",
+    icon: "warning",
+    iconColor: colors.orange,
+    showCancelButton: true,
+    confirmButtonColor: "green",
+    cancelButtonColor: "red",
+    confirmButtonText: "Yes, complete it!",
+    reverseButtons: true,
+    background: darkMode ? "#2d2d30" : "white",
+    color: darkMode ? "white" : "black",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      addNewWorkoutHistoryDoc(listsRef, date, workoutName, completedSets)
+      navigation();
+
+      Swal.fire({
+        title: "Good Job!",
+        text: "Your workout has been recorded.",
+        icon: "success",
+        iconColor: "#77DD77",
+        confirmButtonColor: "green",
+        background: darkMode ? "#2d2d30" : "white",
+        color: darkMode ? "white" : "black",
+      });
+    }
+  });
+};
 
 export const alertDelete = (
   darkMode: boolean,
@@ -63,7 +102,7 @@ export const alertUpdate = (
   }).then((result) => {
     if (result.isConfirmed) {
       const newDocRef = ref.doc(`${date}: ${workoutName}`);
-      newDocRef.set({completedSets: data, workoutName, date});
+      newDocRef.set({ completedSets: data, workoutName, date });
       removeDoc(ref, oldDoc);
       callback();
       console.log(`updated item: ${oldDoc}`);
