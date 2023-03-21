@@ -71,7 +71,15 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={() => {
+              navigation.navigate('EditHistoryItem',
+                {
+                  date: historyItem.date,
+                  workoutName: historyItem.workoutName,
+                  completedSets: historyItem.completedSets,
+                  oldDoc: historyItem.id
+                });
+            }}
             style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
           >
             <Ionicons name="options-outline" size={30} color="black" />

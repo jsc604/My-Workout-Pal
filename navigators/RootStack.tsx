@@ -26,6 +26,7 @@ import { DarkModeContext } from "../providers/DarkModeProvider";
 // helpers
 import { getName } from "../helpers/databaseHelpers";
 import { ExerciseBlock, ExerciseCluster } from "../helpers/workoutTypes";
+import EditHistoryItem from "../screens/EditHistoryItem";
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -37,6 +38,7 @@ export type RootStackParamList = {
   Settings: undefined;
   WorkoutHistoryList: undefined;
   WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], fromHistory: boolean };
+  EditHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], oldDoc: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -201,6 +203,21 @@ const RootStack: FunctionComponent = () => {
               ,
               headerBackTitleVisible: false,
             })
+        }}
+      />
+      <Stack.Screen
+        name="EditHistoryItem"
+        component={EditHistoryItem}
+        options={({ route }) => {
+          return ({
+            headerTitle: (props) => (
+              <Greeting
+                mainText={`Edit ${route.params.workoutName}`}
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
+          })
         }}
       />
     </Stack.Navigator>
