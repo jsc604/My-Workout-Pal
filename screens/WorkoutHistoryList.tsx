@@ -1,7 +1,7 @@
 import React from "react";
 import { FunctionComponent, useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
@@ -39,7 +39,6 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
       .currentUser?.uid)
     .collection('workoutHistory');
 
-
   useEffect(() => {
     getWorkoutHistory(
       listsRef,
@@ -66,13 +65,24 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
         }}
         style={styles.row}
       >
-        <RegularText textStyles={{ marginLeft: 10 }}>{historyItem.id}</RegularText>
-        <TouchableOpacity
-          onPress={() => { handleDeleteItem(historyItem.id, darkMode) }}
-          style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
-        >
-          <Ionicons name="trash-outline" size={30} color={colors.red} />
-        </TouchableOpacity>
+        <View>
+          <RegularText textStyles={{ marginLeft: 10, fontWeight: 'bold' }}>{historyItem.date}</RegularText>
+          <RegularText textStyles={{ marginLeft: 10 }}>{historyItem.workoutName}</RegularText>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => { }}
+            style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
+          >
+            <Ionicons name="options-outline" size={30} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => { handleDeleteItem(historyItem.id, darkMode) }}
+            style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center', marginLeft: 5, }}
+          >
+            <Ionicons name="trash-outline" size={30} color={colors.red} />
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     );
   })
