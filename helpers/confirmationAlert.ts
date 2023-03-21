@@ -1,5 +1,5 @@
 // firebase
-import firebase from '../node_modules/firebase/compat/';
+import firebase from "../node_modules/firebase/compat/";
 const { auth } = firebase;
 
 import Swal from "sweetalert2";
@@ -39,6 +39,46 @@ export const alertDelete = (
   });
 };
 
+export const alertUpdate = (
+  darkMode: boolean,
+  ref: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
+  oldDoc: string,
+  date: string,
+  workoutName: string,
+  { ...data }
+) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    iconColor: colors.orange,
+    showCancelButton: true,
+    confirmButtonColor: "green",
+    cancelButtonColor: "red",
+    confirmButtonText: "Yes, update it!",
+    reverseButtons: true,
+    background: darkMode ? "#2d2d30" : "white",
+    color: darkMode ? "white" : "black",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const newDocRef = ref.doc(`${date}: ${workoutName}`);
+      newDocRef.set(data).then(() => {
+        removeDoc(ref, oldDoc);
+        console.log(`updated item: ${oldDoc}`);
+      });
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your workout has been updated.",
+        icon: "success",
+        iconColor: "#77DD77",
+        confirmButtonColor: "green",
+        background: darkMode ? "#2d2d30" : "white",
+        color: darkMode ? "white" : "black",
+      });
+    }
+  });
+};
+
 export const resetPassword = (darkMode: boolean) => {
   Swal.fire({
     title: "Forgot Password",
@@ -64,7 +104,7 @@ export const resetPassword = (darkMode: boolean) => {
       Swal.fire({
         title: "Password Reset Email Sent",
         icon: "success",
-        iconColor: 'green',
+        iconColor: "green",
         confirmButtonColor: "green",
         color: darkMode ? "white" : "black",
         background: darkMode ? "#2d2d30" : "white",
