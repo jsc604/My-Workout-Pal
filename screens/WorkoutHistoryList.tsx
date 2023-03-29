@@ -60,7 +60,6 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
               date: historyItem.date,
               workoutName: historyItem.workoutName,
               completedSets: historyItem.completedSets,
-              fromHistory: true
             })
         }}
         style={styles.row}

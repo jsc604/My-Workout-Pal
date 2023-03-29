@@ -13,6 +13,7 @@ import { DarkModeContext } from "../providers/DarkModeProvider";
 
 // navigation
 import { RootStackParamList } from "../navigators/RootStack"
+import { StackActions } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootStackParamList, "StartWorkout">;
 
@@ -126,13 +127,13 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
       </ScrollView>
 
       <RegularButton
-        onPress={() => alertComplete(listsRef, formattedDate, name, completedWorkout, darkMode,
-          () => navigation.navigate('WorkoutHistoryItem', {
-            date: formattedDate,
-            workoutName: name,
-            completedSets: completedWorkout,
-            fromHistory: false
-          })
+        onPress={() => alertComplete(
+          listsRef,
+          formattedDate,
+          name,
+          completedWorkout,
+          darkMode,
+          () => navigation.dispatch(StackActions.popToTop())
         )}
         btnStyles={{ width: '90%', marginTop: 20, marginBottom: 20, backgroundColor: colors.green }}
         textStyles={{ fontWeight: 'bold' }}

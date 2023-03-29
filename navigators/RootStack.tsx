@@ -37,7 +37,7 @@ export type RootStackParamList = {
   StartWorkout: { name: string, exercises: ExerciseBlock[] };
   Settings: undefined;
   WorkoutHistoryList: undefined;
-  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], fromHistory: boolean };
+  WorkoutHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[] };
   EditHistoryItem: { date: string, workoutName: string, completedSets: ExerciseCluster[], oldDoc: string };
 };
 
@@ -173,36 +173,16 @@ const RootStack: FunctionComponent = () => {
       <Stack.Screen
         name="WorkoutHistoryItem"
         component={WorkoutHistoryItem}
-        options={({ route, navigation }) => {
-          return route.params.fromHistory ?
-            ({
-              headerTitle: (props) => (
-                <Greeting
-                  mainText={`${route.params.date}`}
-                  {...props}
-                />
-              ),
-              headerTitleAlign: 'center',
-            })
-            :
-            ({
-              headerTitle: (props) => (
-                <Greeting
-                  mainText={`${route.params.date}`}
-                  {...props}
-                />
-              ),
-              headerTitleAlign: 'center',
-              headerLeft: () =>
-                <TouchableOpacity
-                  onPress={() => { navigation.dispatch(StackActions.popToTop()) }}
-                  style={{ marginLeft: 15 }}
-                >
-                  <Ionicons name="arrow-back-outline" size={25} color={ darkMode ? 'white' : colors.black} />
-                </TouchableOpacity>
-              ,
-              headerBackTitleVisible: false,
-            })
+        options={({ route }) => {
+          return ({
+            headerTitle: (props) => (
+              <Greeting
+                mainText={`${route.params.date}`}
+                {...props}
+              />
+            ),
+            headerTitleAlign: 'center'
+          })
         }}
       />
       <Stack.Screen
