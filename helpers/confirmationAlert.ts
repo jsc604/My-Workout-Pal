@@ -102,8 +102,8 @@ export const alertUpdate = (
   }).then((result) => {
     if (result.isConfirmed) {
       const newDocRef = ref.doc(`${date}: ${workoutName}`);
-      newDocRef.set({ completedSets: data, workoutName, date });
       removeDoc(ref, oldDoc);
+      newDocRef.set({ completedSets: data, workoutName, date });
       callback();
       console.log(`updated item: ${oldDoc}`);
 
