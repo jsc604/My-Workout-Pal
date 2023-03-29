@@ -137,7 +137,7 @@ const Login: FunctionComponent = () => {
 
           <RegularButton
             btnStyles={{ width: '90%', backgroundColor: colors.red, marginBottom: 20 }}
-            textStyles={{ fontSize: 22 }}
+            textStyles={{ fontSize: 22, color: darkMode ? 'white' : 'black' }}
             onPress={() => {
 
               if (!isCreateMode) {

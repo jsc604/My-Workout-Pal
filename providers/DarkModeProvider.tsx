@@ -3,7 +3,6 @@ import React, { useState, createContext, FunctionComponent, ReactNode } from "re
 export type DarkModeContextType = {
   darkMode: boolean;
   setDarkMode: (value: boolean) => void;
-
 };
 
 export const DarkModeContext = createContext<DarkModeContextType>({
