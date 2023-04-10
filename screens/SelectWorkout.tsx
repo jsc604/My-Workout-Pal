@@ -78,7 +78,7 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
   });
 
   return (
-    <SelectWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <SelectWorkoutContainer style={{ backgroundColor: darkMode ? colors.black : 'white' }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { navigation.navigate("CreateWorkout") }}
@@ -90,10 +90,10 @@ const SelectWorkout: FunctionComponent<Props> = ({ navigation }) => {
 
       {workoutList.length < 1 ?
         <>
-          <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>
+          <RegularText textStyles={{ marginTop: 'auto', color: darkMode ? colors.white : colors.black }}>
             You have no workouts
           </RegularText>
-          <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>
+          <RegularText textStyles={{ marginBottom: 'auto', color: darkMode ? colors.white :colors.black }}>
             Create one to get started
           </RegularText>
         </>

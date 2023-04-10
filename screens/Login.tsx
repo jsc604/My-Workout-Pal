@@ -73,10 +73,10 @@ const Login: FunctionComponent = () => {
   };
 
   return (
-    <LoginContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
+    <LoginContainer style={{ backgroundColor: darkMode ? colors.black : 'white', flex: 1 }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <ScrollView>
-        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red, width: '80%', marginHorizontal: 'auto' }}>Workout Tracker</HeaderText>
+        <HeaderText textStyles={{ textAlign: 'center', marginVertical: 10, color: colors.red, width: '80%', marginHorizontal: 'auto' }}>My Workout Pal</HeaderText>
 
         <Image source={dumbbell} style={{ width: 300, height: 200, alignSelf: 'center', marginVertical: 50 }} />
 
@@ -125,13 +125,13 @@ const Login: FunctionComponent = () => {
                 setLoginError(false);
                 setIsCreateMode(!isCreateMode);
               }}>
-              <Text style={{ fontSize: 15, color: darkMode ? colors.orange : 'blue', marginVertical: 10 }}>
+              <Text style={{ fontSize: 15, color: darkMode ? '#ECEFF1': 'blue', marginVertical: 10 }}>
                 {isCreateMode ? 'Already have an account?' : 'Create a new account'}
               </Text>
             </TouchableOpacity>
             {!isCreateMode &&
               <TouchableOpacity onPress={() => resetPassword(darkMode)}>
-                <Text style={{ fontSize: 15, color: darkMode ? colors.orange : 'blue', marginVertical: 10 }}>Forgot Password?</Text>
+                <Text style={{ fontSize: 15, color: darkMode ? '#ECEFF1' : 'blue', marginVertical: 10 }}>Forgot Password?</Text>
               </TouchableOpacity>}
           </View>
 

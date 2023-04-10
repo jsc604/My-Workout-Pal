@@ -108,7 +108,7 @@ const StartWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   });
 
   return (
-    <StartWorkoutContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <StartWorkoutContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? colors.black : 'white' }}>
 
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <Stopwatch />

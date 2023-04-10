@@ -111,7 +111,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
   });
 
   return (
-    <EditWorkoutContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <EditWorkoutContainer style={{ backgroundColor: darkMode ? colors.black : 'white' }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <TextInput
         onChangeText={setWorkoutName}
@@ -142,7 +142,7 @@ const EditWorkout: FunctionComponent<Props> = ({ navigation, route }) => {
             onPress={handleAddRow}
             style={{ marginVertical: 20, width: 'fit-content', borderRadius: 999, marginHorizontal: 'auto' }}
           >
-            <Ionicons name="add-circle-outline" size={50} color={darkMode ? 'white' : colors.black} />
+            <Ionicons name="add-circle-outline" size={50} color={darkMode ? colors.white :colors.black} />
           </TouchableOpacity>
         </ScrollView>)}
 

@@ -96,12 +96,12 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
 
   if (workoutHistoryList.length < 1) {
     return (
-      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? colors.black : 'white' }}>
         <StatusBar style={darkMode ? 'dark' : 'light'} />
-        <RegularText textStyles={{ marginTop: 'auto', color: colors.black }}>
+        <RegularText textStyles={{ marginTop: 'auto', color: darkMode ? colors.white :colors.black }}>
           You have not completed
         </RegularText>
-        <RegularText textStyles={{ marginBottom: 'auto', color: colors.black }}>
+        <RegularText textStyles={{ marginBottom: 'auto', color: darkMode ? colors.white :colors.black }}>
           any workouts
         </RegularText>
       </WorkoutHistoryListContainer>
@@ -109,8 +109,8 @@ const WorkoutHistoryList: FunctionComponent<Props> = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
-      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white', flex: 1 }}>
+    <ScrollView style={{ backgroundColor: darkMode ? colors.black : 'white', flex: 1 }}>
+      <WorkoutHistoryListContainer style={{ backgroundColor: darkMode ? colors.black : 'white', flex: 1 }}>
         <StatusBar style={darkMode ? 'dark' : 'light'} />
         {listItems}
       </WorkoutHistoryListContainer>

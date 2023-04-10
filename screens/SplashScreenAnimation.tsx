@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Container } from "../components/shared";
+import { colors } from "../components/colors";
 
 // image
 import dumbbell from "../assets/heavy-dumbbell-in-hand-cartoon-gym-bodybuilding-vector-13671760-removebg-preview.png";
 
 const SplashScreenContainer = styled(Container)`
-  background-color: #2d2d30;
+  background-color: ${colors.black};
   width: 100%;
   height: 100%;
   justify-content: center;

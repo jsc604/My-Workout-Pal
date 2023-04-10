@@ -180,14 +180,14 @@ const EditHistoryItem: FunctionComponent<Props> = ({ route, navigation }) => {
     }
 
     return (
-      <View key={i + 2000} style={{ borderBottomWidth: 1, paddingBottom: 10, borderBottomColor: colors.black }}>
+      <View key={i + 2000} style={{ borderBottomWidth: 1, paddingBottom: 10, borderBottomColor: darkMode ? colors.white :colors.black }}>
         {sets}
       </View>
     );
   });
 
   return (
-    <WorkoutHistoryItemContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <WorkoutHistoryItemContainer style={{ flex: 1, alignItems: 'center', backgroundColor: darkMode ? colors.black : 'white' }}>
 
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <View style={{ flexDirection: 'row', marginVertical: 20 }}>

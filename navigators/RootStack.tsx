@@ -59,9 +59,9 @@ const RootStack: FunctionComponent = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: darkMode ? 'white' : colors.black,
+        headerTintColor: darkMode ? colors.white :colors.black,
         headerStyle: {
-          backgroundColor: darkMode ? '#2d2d30' : 'white',
+          backgroundColor: darkMode ? colors.black : 'white',
         },
         headerRight: () => (
           <SettingsButton navigation={navigation} />

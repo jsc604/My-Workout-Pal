@@ -17,8 +17,8 @@ const GuestLogin: FunctionComponent = () => {
       padding: 5,
       borderWidth: 1,
       borderRadius: 7,
-      borderColor: darkMode ? 'orange' : 'blue',
-      backgroundColor: darkMode ? colors.orange : colors.blue,
+      borderColor: darkMode ? '#ECEFF1' : 'blue',
+      backgroundColor: darkMode ? '#ECEFF1' : colors.blue,
     }
   });
 

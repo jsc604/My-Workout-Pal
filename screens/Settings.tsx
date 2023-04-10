@@ -21,11 +21,11 @@ const Settings: FunctionComponent<Props> = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   return (
-    <SettingsContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <SettingsContainer style={{ backgroundColor: darkMode ? colors.black : 'white' }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { setDarkMode(!darkMode) }}
-        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: darkMode ? colors.orange : colors.purple }}
+        btnStyles={{ width: '70%', marginTop: 20, backgroundColor: darkMode ? colors.purple : colors.purple }}
         textStyles={{ fontWeight: 'bold' }}
       >
         {darkMode ? 'Light Mode' : 'Dark Mode'}

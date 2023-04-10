@@ -20,7 +20,7 @@ const Home: FunctionComponent<Props> = ({ navigation }) => {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <HomeContainer style={{ backgroundColor: darkMode ? '#2d2d30' : 'white' }}>
+    <HomeContainer style={{ backgroundColor: darkMode ? colors.black : 'white' }}>
       <StatusBar style={darkMode ? 'dark' : 'light'} />
       <RegularButton
         onPress={() => { navigation.navigate("SelectWorkout") }}

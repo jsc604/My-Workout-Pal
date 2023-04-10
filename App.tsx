@@ -7,6 +7,7 @@ import SplashScreenAnimation from "./screens/SplashScreenAnimation";
 import { NavigationContainer } from "@react-navigation/native";
 const { width } = Dimensions.get('window');
 import DarkModeProvider from './providers/DarkModeProvider';
+import { colors } from "./components/colors";
 
 // firebase
 import firebase from 'firebase/compat/app';
@@ -80,7 +81,7 @@ export default function App() {
 
   return (
     <DarkModeProvider>
-      <View style={{ backgroundColor: '#2d2d30', flex: 1 }}>
+      <View style={{ backgroundColor: colors.black, flex: 1 }}>
         <View style={styles.screen}>
           <NavigationContainer>
             {isAuthenticated ? <RootStack /> : <AuthStack />}

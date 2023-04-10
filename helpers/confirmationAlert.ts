@@ -25,7 +25,7 @@ export const alertComplete = (
     cancelButtonColor: "red",
     confirmButtonText: "Yes, complete it!",
     reverseButtons: true,
-    background: darkMode ? "#2d2d30" : "white",
+    background: darkMode ? colors.black : "white",
     color: darkMode ? "white" : "black",
   }).then((result) => {
     if (result.isConfirmed) {
@@ -38,7 +38,7 @@ export const alertComplete = (
         icon: "success",
         iconColor: "#77DD77",
         confirmButtonColor: "green",
-        background: darkMode ? "#2d2d30" : "white",
+        background: darkMode ? colors.black : "white",
         color: darkMode ? "white" : "black",
       });
     }
@@ -60,7 +60,7 @@ export const alertDelete = (
     cancelButtonColor: "red",
     confirmButtonText: "Yes, delete it!",
     reverseButtons: true,
-    background: darkMode ? "#2d2d30" : "white",
+    background: darkMode ? colors.black : "white",
     color: darkMode ? "white" : "black",
   }).then((result) => {
     if (result.isConfirmed) {
@@ -71,7 +71,7 @@ export const alertDelete = (
         icon: "success",
         iconColor: "#77DD77",
         confirmButtonColor: "green",
-        background: darkMode ? "#2d2d30" : "white",
+        background: darkMode ? colors.black : "white",
         color: darkMode ? "white" : "black",
       });
     }
@@ -97,7 +97,7 @@ export const alertUpdate = (
     cancelButtonColor: "red",
     confirmButtonText: "Yes, update it!",
     reverseButtons: true,
-    background: darkMode ? "#2d2d30" : "white",
+    background: darkMode ? colors.black : "white",
     color: darkMode ? "white" : "black",
   }).then((result) => {
     if (result.isConfirmed) {
@@ -113,7 +113,7 @@ export const alertUpdate = (
         icon: "success",
         iconColor: "#77DD77",
         confirmButtonColor: "green",
-        background: darkMode ? "#2d2d30" : "white",
+        background: darkMode ? colors.black : "white",
         color: darkMode ? "white" : "black",
       });
     }
@@ -127,7 +127,7 @@ export const resetPassword = (darkMode: boolean) => {
     input: "email",
     icon: "question",
     color: darkMode ? "white" : "black",
-    background: darkMode ? "#2d2d30" : "white",
+    background: darkMode ? colors.black : "white",
     confirmButtonColor: "green",
     reverseButtons: true,
     inputAttributes: {
@@ -148,7 +148,7 @@ export const resetPassword = (darkMode: boolean) => {
         iconColor: "green",
         confirmButtonColor: "green",
         color: darkMode ? "white" : "black",
-        background: darkMode ? "#2d2d30" : "white",
+        background: darkMode ? colors.black : "white",
       });
     }
   });

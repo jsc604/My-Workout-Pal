@@ -16,6 +16,38 @@ type labelProps = {
 const LabelledInput: FunctionComponent<labelProps> = ({ label, errorMessage, text, onChangeText, autoComplete, secureTextEntry }) => {
   const {darkMode} = useContext(DarkModeContext);
 
+  const styles = StyleSheet.create({
+    container: {
+      paddingHorizontal: 8,
+      margin: 4,
+      width: '90%',
+    },
+    labelContainer: {
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      marginBottom: 4,
+      alignItems: 'center'
+    },
+    labelStyle: {
+      fontWeight: 'bold',
+      color: darkMode ? colors.white : colors.black,
+    },
+    error: {
+      color: colors.red,
+      fontSize: 15,
+      marginLeft: 4,
+      textAlign: 'center'
+    },
+    input: {
+      borderBottomColor: darkMode ? colors.white : colors.black,
+      borderBottomWidth: 1,
+      paddingLeft: 4,
+      height: 32,
+      fontSize: 24,
+      color: 'white'
+    }
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
@@ -32,37 +64,5 @@ const LabelledInput: FunctionComponent<labelProps> = ({ label, errorMessage, tex
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 8,
-    margin: 4,
-    width: '90%',
-  },
-  labelContainer: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginBottom: 4,
-    alignItems: 'center'
-  },
-  labelStyle: {
-    fontWeight: 'bold',
-    color: colors.black,
-  },
-  error: {
-    color: colors.red,
-    fontSize: 15,
-    marginLeft: 4,
-    textAlign: 'center'
-  },
-  input: {
-    borderBottomColor: colors.black,
-    borderBottomWidth: 1,
-    paddingLeft: 4,
-    height: 32,
-    fontSize: 24,
-    color: 'white'
-  }
-})
 
 export default LabelledInput;
