@@ -1,9 +1,9 @@
-# Workout Tracker
-Welcome to Workout Tracker, the ultimate fitness companion built using Expo, React Native,TypeScript, and Firebase. With Workout Tracker, you can create and track your workouts like never before, all while enjoying a beautiful and intuitive user interface. 
+# My Workout Pal
+Welcome to My Workout Pal, the ultimate fitness companion built using Expo, React Native,TypeScript, and Firebase. With My Workout Pal, you can create and track your workouts like never before, all while enjoying a beautiful and intuitive user interface. 
 
 **The app is built for mobile use so larger desktop screens may experience a stretched display.**
 
-Here is a link to the [Workout Tracker](https://workouttracker-2da55.web.app/)
+Here is a link to [My Workout Pal](https://myworkoutpal.com/)
 
 # Features
 * Create custom workouts tailored to your fitness goals and preferences
@@ -32,4 +32,4 @@ Here is a link to the [Workout Tracker](https://workouttracker-2da55.web.app/)
 
 
 # Getting Started
-To get started, simply visit [Workout Tracker](https://workouttracker-2da55.web.app/). Once you are there, simply create an account and start building your custom workouts right away.
+To get started, simply visit [My Workout Pal](https://myworkoutpal.com/). Once you are there, simply create an account and start building your custom workouts right away.
